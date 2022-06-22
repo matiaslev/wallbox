@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.matiaslevwallboxchallenge.ui.screens.HistoricalDataScreen
+import com.example.matiaslevwallboxchallenge.ui.screens.historical_data.HistoricalDataScreen
 import com.example.matiaslevwallboxchallenge.ui.screens.live_data.LiveDataScreen
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
 
