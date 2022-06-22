@@ -1,4 +1,4 @@
-package com.example.data
+package com.example.data.entities
 
 
 import com.example.data.base.BaseEntity

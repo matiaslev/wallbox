@@ -9,7 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.matiaslevwallboxchallenge.ui.screens.HistoricalDataScreen
-import com.example.matiaslevwallboxchallenge.ui.screens.LiveDataScreen
+import com.example.matiaslevwallboxchallenge.ui.screens.live_data.LiveDataScreen
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
 
 @Composable
@@ -22,21 +22,25 @@ fun ChallengeApp() {
             val navController = rememberNavController()
             NavHost(
                 navController = navController,
-                startDestination =  "LiveData"
+                startDestination =  Screens.LiveData.name
             ) {
                 composable(
-                    route = "LiveData"
+                    route = Screens.LiveData.name
                 ) {
                     LiveDataScreen(
                         navController = navController
                     )
                 }
                 composable(
-                    route = "HistoricalData"
+                    route = Screens.HistoricalData.name
                 ) {
                     HistoricalDataScreen()
                 }
             }
         }
     }
+}
+
+enum class Screens {
+    LiveData, HistoricalData
 }

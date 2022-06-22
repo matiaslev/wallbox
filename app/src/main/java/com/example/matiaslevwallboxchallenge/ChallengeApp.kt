@@ -1,6 +1,9 @@
 package com.example.matiaslevwallboxchallenge
 
 import android.app.Application
+import com.example.matiaslevwallboxchallenge.di.actionsModule
+import com.example.matiaslevwallboxchallenge.di.repositoriesModule
+import com.example.matiaslevwallboxchallenge.di.viewModelsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -14,7 +17,9 @@ class ChallengeApp: Application() {
             androidLogger(Level.ERROR)
             androidContext(this@ChallengeApp)
             modules(listOf(
-
+                viewModelsModule,
+                actionsModule,
+                repositoriesModule
             ))
         }
     }
