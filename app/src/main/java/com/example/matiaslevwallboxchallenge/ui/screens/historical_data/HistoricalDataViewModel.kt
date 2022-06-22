@@ -41,7 +41,7 @@ class HistoricalDataViewModel(
         )
         is Action.HistoricalDataSuccess -> state.copy(
             isLoading = true,
-            historicalData = null
+            historicalData = viewAction.historicalData
         )
     }
 
