@@ -1,6 +1,7 @@
 package com.example.matiaslevwallboxchallenge.ui.screens.historical_data
 
 import android.content.res.Configuration
+import android.graphics.Color
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -9,17 +10,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import com.example.domain.models.HistoricalDataItem
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
-import me.bytebeats.views.charts.line.LineChart
-import me.bytebeats.views.charts.line.LineChartData
-import me.bytebeats.views.charts.line.render.line.SolidLineDrawer
-import me.bytebeats.views.charts.line.render.point.EmptyPointDrawer
-import me.bytebeats.views.charts.line.render.point.FilledCircularPointDrawer
-import me.bytebeats.views.charts.line.render.xaxis.SimpleXAxisDrawer
-import me.bytebeats.views.charts.line.render.yaxis.SimpleYAxisDrawer
-import me.bytebeats.views.charts.simpleChartAnimation
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
 import org.koin.androidx.compose.get
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Composable
 fun HistoricalDataScreen(
@@ -45,21 +46,64 @@ fun HistoricalDataScreen(
 fun LineChartView(
     historicalData: List<HistoricalDataItem>
 ) {
-    LineChart(
-        lineChartData = LineChartData(
-            points = historicalData.map { it.toSolarPanelCharPoint() }
-        ),
-        // Optional properties.
+    AndroidView(
         modifier = Modifier
             .fillMaxSize()
-            .padding(vertical = 24.dp),
-        animation = simpleChartAnimation(),
-        pointDrawer = EmptyPointDrawer,
-        lineDrawer = SolidLineDrawer(),
-        xAxisDrawer = SimpleXAxisDrawer(),
-        yAxisDrawer = SimpleYAxisDrawer(),
-        horizontalOffset = 5f
+            .padding(16.dp),
+        factory = { context ->
+            LineChart(context).apply {
+                data = LineData(
+                    // Solar Panel
+                    LineDataSet(
+                        historicalData.map { it.toSolarPanelPowerEntry() },
+                        "solar" // not used
+                    ).apply {
+                        setDrawCircles(false)
+                        lineWidth = 3f
+                        setDrawFilled(false)
+                        color = Color.YELLOW
+                    },
+                    // Grid
+                    LineDataSet(
+                        historicalData.map { it.toGridPowerEntry() },
+                        "grid" // not used
+                    ).apply {
+                        setDrawCircles(false)
+                        lineWidth = 3f
+                        setDrawFilled(false)
+                        color = Color.GREEN
+                    }
+                )
+
+                xAxis.apply {
+                    setDrawGridLines(false)
+                    position = XAxis.XAxisPosition.BOTTOM
+                    setLabelCount(8, true)
+                    valueFormatter = object : ValueFormatter() {
+                        override fun getFormattedValue(value: Float): String {
+                            val date = Date(value.toLong() * 1000)
+                            return getChartDateFormatHourOfDay(date)
+                        }
+                    }
+                }
+
+                axisRight.apply {
+                    setDrawGridLines(false)
+                }
+
+                axisLeft.isEnabled = false
+                setDrawBorders(false)
+
+                description.text = ""
+            }
+        }
     )
+}
+
+fun getChartDateFormatHourOfDay(date: Date): String {
+    val chartFormatHourOfDay = "hh a"
+    val format = SimpleDateFormat(chartFormatHourOfDay, Locale.getDefault())
+    return format.format(date)
 }
 
 @Composable

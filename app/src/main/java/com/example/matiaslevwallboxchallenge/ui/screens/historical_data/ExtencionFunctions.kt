@@ -1,8 +1,15 @@
 package com.example.matiaslevwallboxchallenge.ui.screens.historical_data
 
 import com.example.domain.models.HistoricalDataItem
-import me.bytebeats.views.charts.line.LineChartData
+import com.github.mikephil.charting.data.Entry
+import java.time.ZonedDateTime
 
-fun HistoricalDataItem.toSolarPanelCharPoint() = LineChartData.Point(
-    pvActivePower.toFloat(), timestamp
+fun HistoricalDataItem.toSolarPanelPowerEntry() = Entry(
+    ZonedDateTime.parse(timestamp).toEpochSecond().toFloat(),
+    pvActivePower.toFloat()
+)
+
+fun HistoricalDataItem.toGridPowerEntry() = Entry(
+    ZonedDateTime.parse(timestamp).toEpochSecond().toFloat(),
+    gridActivePower.toFloat()
 )
