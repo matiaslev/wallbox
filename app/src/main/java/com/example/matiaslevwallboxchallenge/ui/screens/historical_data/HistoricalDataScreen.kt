@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.domain.models.HistoricalDataItem
+import com.example.matiaslevwallboxchallenge.R
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -19,7 +20,10 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import org.koin.androidx.compose.get
-import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Composable
@@ -56,7 +60,7 @@ fun LineChartView(
                     // Solar Panel
                     LineDataSet(
                         historicalData.map { it.toSolarPanelPowerEntry() },
-                        "solar" // not used
+                        context.getString(R.string.solar_panels)
                     ).apply {
                         setDrawCircles(false)
                         lineWidth = 3f
@@ -66,22 +70,36 @@ fun LineChartView(
                     // Grid
                     LineDataSet(
                         historicalData.map { it.toGridPowerEntry() },
-                        "grid" // not used
+                        context.getString(R.string.from_the_grid)
                     ).apply {
                         setDrawCircles(false)
                         lineWidth = 3f
                         setDrawFilled(false)
                         color = Color.GREEN
-                    }
+                    },
+                    // Quasars
+                    LineDataSet(
+                        historicalData.map { it.toQuasarsActivePowerEntry() },
+                        context.getString(R.string.quasars_supplying_building)
+                    ).apply {
+                        setDrawCircles(false)
+                        lineWidth = 3f
+                        setDrawFilled(false)
+                        color = Color.BLUE
+                    },
                 )
 
                 xAxis.apply {
                     setDrawGridLines(false)
                     position = XAxis.XAxisPosition.BOTTOM
-                    setLabelCount(8, true)
                     valueFormatter = object : ValueFormatter() {
                         override fun getFormattedValue(value: Float): String {
-                            val date = Date(value.toLong() * 1000)
+                            //val date = Instant.ofEpochMilli(value.toLong() * 1000).atZone(ZoneOffset.of("+00:00")).toLocalDate();
+                            // val date = Date(value.toLong() * 1000)
+                            val date: LocalDateTime = LocalDateTime.ofInstant(
+                                Instant.ofEpochMilli(value.toLong() * 1000),
+                                ZoneOffset.of("+00:00")
+                            )
                             return getChartDateFormatHourOfDay(date)
                         }
                     }
@@ -100,10 +118,9 @@ fun LineChartView(
     )
 }
 
-fun getChartDateFormatHourOfDay(date: Date): String {
-    val chartFormatHourOfDay = "hh a"
-    val format = SimpleDateFormat(chartFormatHourOfDay, Locale.getDefault())
-    return format.format(date)
+fun getChartDateFormatHourOfDay(date: LocalDateTime): String {
+    val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd hh a")
+    return date.format(dateTimeFormatter)
 }
 
 @Composable
