@@ -3,7 +3,9 @@ package com.example.data.entities
 
 import com.example.data.base.BaseEntity
 import com.example.domain.models.LiveData
+import com.example.domain.models.QuasarAction
 import com.google.gson.annotations.SerializedName
+import kotlin.math.abs
 
 data class LiveDataResponse(
     @SerializedName("solar_power")
@@ -22,12 +24,23 @@ data class LiveDataResponse(
     val currentEnergy: Double
 ) : BaseEntity<LiveData> {
     override fun toDomainModel() = LiveData(
-        solarPower,
-        quasarsPower,
-        gridPower,
-        buildingDemand,
-        systemSoc,
-        totalEnergy,
-        currentEnergy
+        solarPower = solarPower,
+        absoluteQuasarsPower = abs(quasarsPower),
+        quasarAction = when {
+            quasarsPower > 0 -> {
+                QuasarAction.ChargingCar
+            }
+            quasarsPower < 0 -> {
+                QuasarAction.SupplyingBuilding
+            }
+            else -> {
+                QuasarAction.Nothing
+            }
+        },
+        gridPower = gridPower,
+        buildingDemand = buildingDemand,
+        systemSoc = systemSoc,
+        totalEnergy = totalEnergy,
+        currentEnergy = currentEnergy
     )
 }

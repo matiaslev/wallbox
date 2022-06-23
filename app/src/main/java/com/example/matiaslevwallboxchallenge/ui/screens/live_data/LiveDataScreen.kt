@@ -57,7 +57,7 @@ fun LiveDataScreen(
             verticalArrangement = Arrangement.Center
         ) {
             state.liveData?.let { liveData ->
-                Quasar(power = liveData.quasarsPower)
+                Quasar(power = liveData.absoluteQuasarsPower)
 
                 SourceOfEnergyData(liveData = liveData)
 

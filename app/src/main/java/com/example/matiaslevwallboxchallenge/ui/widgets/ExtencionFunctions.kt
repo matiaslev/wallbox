@@ -14,6 +14,6 @@ fun LiveData.toGridPowerPieEntry() = PieEntry(
 )
 
 fun LiveData.toQuasarsPowerPieEntry() = PieEntry(
-    if (quasarsPower < 0) quasarsPower.toFloat() * -1 else 0f,
+    absoluteQuasarsPower.toFloat(),
     "Quasar Power"
 )

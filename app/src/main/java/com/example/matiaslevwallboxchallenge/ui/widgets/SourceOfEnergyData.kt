@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.domain.models.LiveData
+import com.example.domain.models.QuasarAction
 import com.example.matiaslevwallboxchallenge.R
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
 
@@ -53,14 +54,14 @@ fun SourceOfEnergyData(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = if (liveData.quasarsPower > 0) {
-                        stringResource(id = R.string.quasars_charging_card_from_grid)
-                    } else stringResource(id = R.string.quasars_supplying_building)
+                    text = when (liveData.quasarAction) {
+                        QuasarAction.ChargingCar -> stringResource(id = R.string.quasars_charging_card_from_grid)
+                        QuasarAction.SupplyingBuilding -> stringResource(id = R.string.quasars_supplying_building)
+                        QuasarAction.Nothing -> stringResource(id = R.string.not_transfering_energy)
+                    }
                 )
                 Text(
-                    text = if (liveData.quasarsPower > 0) {
-                        Utils.decimalFormatOnlyShowDecimalIfNotZero.format(liveData.quasarsPower)
-                    } else Utils.decimalFormatOnlyShowDecimalIfNotZero.format(liveData.quasarsPower * -1)
+                    text =  Utils.decimalFormatOnlyShowDecimalIfNotZero.format(liveData.absoluteQuasarsPower)
                 )
             }
 
@@ -95,9 +96,9 @@ fun SourceOfEnergyData(
 }
 
 @Composable
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
-private fun Preview() {
+@Preview(name = "Quasar Action SupplyingBuilding",uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "Quasar Action SupplyingBuilding",uiMode = Configuration.UI_MODE_NIGHT_NO)
+private fun PreviewSupplyingBuilding() {
     MatiasLevWallboxChallengeTheme {
         SourceOfEnergyData(
             liveData = previewLiveDataMock()
@@ -105,9 +106,40 @@ private fun Preview() {
     }
 }
 
-fun previewLiveDataMock() = LiveData(
+@Composable
+@Preview(name = "Quasar Action ChargingCar",uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "Quasar Action ChargingCar",uiMode = Configuration.UI_MODE_NIGHT_NO)
+private fun PreviewChargingCar() {
+    MatiasLevWallboxChallengeTheme {
+        SourceOfEnergyData(
+            liveData = previewLiveDataMock(
+                action = QuasarAction.ChargingCar
+            )
+        )
+    }
+}
+
+@Composable
+@Preview(name = "Quasar Action Nothing", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "Quasar Action Nothing", uiMode = Configuration.UI_MODE_NIGHT_NO)
+private fun PreviewNothing() {
+    MatiasLevWallboxChallengeTheme {
+        SourceOfEnergyData(
+            liveData = previewLiveDataMock(
+                absoluteQuasar = 0.00,
+                action = QuasarAction.Nothing
+            )
+        )
+    }
+}
+
+fun previewLiveDataMock(
+    absoluteQuasar: Double = 38.732,
+    action: QuasarAction = QuasarAction.SupplyingBuilding
+) = LiveData(
     solarPower = 7.827,
-    quasarsPower = -38.732,
+    absoluteQuasarsPower = absoluteQuasar,
+    quasarAction = action,
     gridPower = 80.475,
     buildingDemand = 127.03399999999999,
     systemSoc = 48.333333333333336,

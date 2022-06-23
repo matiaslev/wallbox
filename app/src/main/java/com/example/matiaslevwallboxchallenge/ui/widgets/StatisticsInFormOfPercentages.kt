@@ -78,15 +78,7 @@ fun StaticInspectionCompanionProvider(
 private fun Preview() {
     MatiasLevWallboxChallengeTheme {
         StaticInspectionCompanionProvider(
-            liveData = LiveData(
-                solarPower = 7.827,
-                quasarsPower = -38.732,
-                gridPower = 80.475,
-                buildingDemand = 127.03399999999999,
-                systemSoc = 48.333333333333336,
-                totalEnergy = 960,
-                currentEnergy = 464.0
-            ),
+            liveData = previewLiveDataMock(),
             onClick = { },
             animateChart = false
         )
