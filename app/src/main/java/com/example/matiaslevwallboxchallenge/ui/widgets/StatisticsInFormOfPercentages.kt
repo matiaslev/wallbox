@@ -12,16 +12,20 @@ import com.example.domain.models.LiveData
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 
 @Composable
 fun StaticInspectionCompanionProvider(
     modifier: Modifier = Modifier
         .size(300.dp),
     liveData: LiveData,
-    isPreview: Boolean = false
+    onClick: () -> Unit,
+    animateChart: Boolean = true
 ) {
     AndroidView(
         modifier = modifier,
@@ -45,14 +49,23 @@ fun StaticInspectionCompanionProvider(
                 pieChart.setUsePercentValues(true)
                 pieChart.description.isEnabled = false
                 pieChart.rotationAngle = 0f
-                pieChart.isHighlightPerTapEnabled = true
                 pieChart.setEntryLabelColor(Color.BLACK)
 
+                pieChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
+                    override fun onValueSelected(e: Entry?, h: Highlight?) {
+                        onClick()
+                    }
+
+                    override fun onNothingSelected() {
+                        // Nothing to do
+                    }
+                })
+
                 /**
-                 * This isPreview is a workaround for add the Easing animation
+                 * This animateChart is a workaround for add the Easing animation
                  * without breaking the preview
                  */
-                if (isPreview.not()) pieChart.animateY(1400, Easing.EaseInOutQuad)
+                if (animateChart) pieChart.animateY(1400, Easing.EaseInOutQuad)
             }
         }
     )
@@ -73,7 +86,8 @@ private fun Preview() {
                 totalEnergy = 960,
                 currentEnergy = 464.0
             ),
-            isPreview = true
+            onClick = { },
+            animateChart = false
         )
     }
 }

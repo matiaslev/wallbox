@@ -53,13 +53,10 @@ fun LiveDataScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Button(onClick = onNavigateToHistoricalData) {
-                Text(text = "Navigate")
-            }
-
             state.liveData?.let { liveData ->
                 StaticInspectionCompanionProvider(
-                    liveData = liveData
+                    liveData = liveData,
+                    onClick = onNavigateToHistoricalData
                 )
             }
         }
