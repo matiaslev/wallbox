@@ -25,18 +25,18 @@ fun SourceOfEnergyData(
     liveData: LiveData
 ) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .padding(16.dp),
         elevation = 2.dp
     ) {
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
             horizontalAlignment = Alignment.Start
         ) {
             Row(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
@@ -47,7 +47,7 @@ fun SourceOfEnergyData(
             }
 
             Row(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -65,7 +65,7 @@ fun SourceOfEnergyData(
             }
 
             Row(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {

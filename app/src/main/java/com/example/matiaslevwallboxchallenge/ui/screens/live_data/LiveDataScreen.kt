@@ -19,6 +19,7 @@ import androidx.navigation.NavController
 import com.example.domain.models.LiveData
 import com.example.matiaslevwallboxchallenge.ui.Screens
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
+import com.example.matiaslevwallboxchallenge.ui.widgets.Quasar
 import com.example.matiaslevwallboxchallenge.ui.widgets.SourceOfEnergyData
 import com.example.matiaslevwallboxchallenge.ui.widgets.StaticInspectionCompanionProvider
 import com.example.matiaslevwallboxchallenge.ui.widgets.previewLiveDataMock
@@ -56,6 +57,8 @@ fun LiveDataScreen(
             verticalArrangement = Arrangement.Center
         ) {
             state.liveData?.let { liveData ->
+                Quasar(power = liveData.quasarsPower)
+
                 SourceOfEnergyData(liveData = liveData)
 
                 StaticInspectionCompanionProvider(

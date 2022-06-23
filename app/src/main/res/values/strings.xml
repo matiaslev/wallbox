@@ -8,4 +8,6 @@
     <string name="grid_power">Grid Power</string>
     <string name="quasars_charging_card_from_grid">Charging card from grid</string>
     <string name="quasars_supplying_the_building_demand">Supplying the building demand</string>
+    <string name="not_providing_building">not providing building</string>
+    <string name="not_charging_car">not charging card</string>
 </resources>
