@@ -5,6 +5,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
+import androidx.test.platform.app.InstrumentationRegistry
 import com.example.domain.mock.MockDomainData
 import com.example.domain.models.QuasarAction
 import com.example.matiaslevwallboxchallenge.ui.screens.live_data.LiveDataScreen
@@ -18,6 +19,8 @@ class LiveDataScreenScreenTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
+
+    private val context = InstrumentationRegistry.getInstrumentation().targetContext
 
     private val absoluteQuasar = 38.732
 
@@ -50,10 +53,10 @@ class LiveDataScreenScreenTest {
         /**
          * Draw once in Quasar Widget and once in SourceOfEnergyData Widget
          */
-        composeTestRule.onAllNodesWithText("Quasars supplying building").assertCountEquals(2)
+        composeTestRule.onAllNodesWithText(context.getString(R.string.quasars_supplying_building)).assertCountEquals(2)
 
 
-        composeTestRule.onNodeWithText("not charging car").assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.not_charging_car)).assertIsDisplayed()
     }
 
     @Test
@@ -86,10 +89,10 @@ class LiveDataScreenScreenTest {
         /**
          * Draw once in Quasar Widget and once in SourceOfEnergyData Widget
          */
-        composeTestRule.onAllNodesWithText("Charging car from grid").assertCountEquals(2)
+        composeTestRule.onAllNodesWithText(context.getString(R.string.quasars_charging_card_from_grid)).assertCountEquals(2)
 
 
-        composeTestRule.onNodeWithText("not providing building").assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.not_providing_building)).assertIsDisplayed()
     }
 
     @Test
@@ -110,7 +113,7 @@ class LiveDataScreenScreenTest {
             }
         }
 
-        composeTestRule.onNodeWithText("not charging car").assertIsDisplayed()
-        composeTestRule.onNodeWithText("not providing building").assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.not_charging_car)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.not_providing_building)).assertIsDisplayed()
     }
 }
