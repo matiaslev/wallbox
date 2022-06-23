@@ -113,7 +113,7 @@ private fun PreviewChargingCar() {
     MatiasLevWallboxChallengeTheme {
         SourceOfEnergyData(
             liveData = MockDomainData.liveDataMock(
-                action = QuasarAction.ChargingCar
+                quasarAction = QuasarAction.ChargingCar
             )
         )
     }
@@ -127,7 +127,7 @@ private fun PreviewNothing() {
         SourceOfEnergyData(
             liveData = MockDomainData.liveDataMock(
                 absoluteQuasar = 0.00,
-                action = QuasarAction.Nothing
+                quasarAction = QuasarAction.Nothing
             )
         )
     }

@@ -11,5 +11,5 @@
     <string name="not_providing_building">not providing building</string>
     <string name="not_charging_car">not charging car</string>
     <string name="empty_text" />
-    <string name="not_transfering_energy">Not transfering energy</string>
+    <string name="not_transfering_energy">Not transferring energy</string>
 </resources>

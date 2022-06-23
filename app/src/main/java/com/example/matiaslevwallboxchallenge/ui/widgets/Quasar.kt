@@ -18,13 +18,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.domain.models.QuasarAction
 import com.example.matiaslevwallboxchallenge.R
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
 
 @Composable
 fun Quasar(
     modifier: Modifier = Modifier,
-    power: Double
+    power: Double,
+    quasarAction: QuasarAction
 ) {
     Card(
         modifier = modifier
@@ -36,15 +38,20 @@ fun Quasar(
                 .padding(top = 8.dp),
             verticalArrangement = Arrangement.Center
         ) {
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                text = if (power > 0) {
-                    stringResource(id = R.string.quasars_charging_card_from_grid)
-                } else stringResource(id = R.string.quasars_supplying_building),
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.h6
-            )
+
+            if (quasarAction != QuasarAction.Nothing) {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    text = when (quasarAction) {
+                        QuasarAction.ChargingCar -> stringResource(id = R.string.quasars_charging_card_from_grid)
+                        QuasarAction.SupplyingBuilding -> stringResource(id = R.string.quasars_supplying_building)
+                        QuasarAction.Nothing -> stringResource(id = R.string.empty_text) // it's not going to happen, but the when should be exhaustive
+                    },
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.h6
+                )
+            }
 
             Row(
                 modifier = modifier
@@ -53,21 +60,66 @@ fun Quasar(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                QuasarCharged(power = power)
-                QuasarDischarged(power = power)
+                QuasarCharged(power = power, quasarAction = quasarAction)
+                QuasarDischarged(power = power, quasarAction = quasarAction)
             }
         }
     }
 }
 
 @Composable
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, device = Devices.PIXEL_4)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, device = Devices.NEXUS_5)
-private fun Preview() {
+@Preview(
+    name = "SupplyingBuilding Dark",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    device = Devices.PIXEL_4
+)
+@Preview(
+    name = "SupplyingBuilding Light",
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    device = Devices.NEXUS_5
+)
+private fun PreviewSupplyingBuilding() {
     MatiasLevWallboxChallengeTheme {
         Column {
-            Quasar(power = -38.732)
-            Quasar(power = 38.732)
+            Quasar(power = 38.732, quasarAction = QuasarAction.SupplyingBuilding)
+        }
+    }
+}
+
+@Composable
+@Preview(
+    name = "ChargingCar Dark",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    device = Devices.PIXEL_4
+)
+@Preview(
+    name = "ChargingCar Light",
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    device = Devices.NEXUS_5
+)
+private fun PreviewChargingCar() {
+    MatiasLevWallboxChallengeTheme {
+        Column {
+            Quasar(power = 38.732, quasarAction = QuasarAction.ChargingCar)
+        }
+    }
+}
+
+@Composable
+@Preview(
+    name = "Nothing Dark",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    device = Devices.PIXEL_4
+)
+@Preview(
+    name = "Nothing Light",
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    device = Devices.NEXUS_5
+)
+private fun PreviewNothing() {
+    MatiasLevWallboxChallengeTheme {
+        Column {
+            Quasar(power = 38.732, quasarAction = QuasarAction.Nothing)
         }
     }
 }

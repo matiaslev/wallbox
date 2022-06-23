@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.domain.mock.MockDomainData
+import com.example.domain.models.QuasarAction
 import com.example.matiaslevwallboxchallenge.ui.Screens
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
 import com.example.matiaslevwallboxchallenge.ui.widgets.Quasar
@@ -55,7 +56,10 @@ fun LiveDataScreen(
             verticalArrangement = Arrangement.Center
         ) {
             state.liveData?.let { liveData ->
-                Quasar(power = liveData.absoluteQuasarsPower)
+                Quasar(
+                    power = liveData.absoluteQuasarsPower,
+                    quasarAction = liveData.quasarAction
+                )
 
                 SourceOfEnergyData(liveData = liveData)
 
@@ -70,19 +74,76 @@ fun LiveDataScreen(
 }
 
 @Composable
-@Preview(uiMode = UI_MODE_NIGHT_YES)
-@Preview(uiMode = UI_MODE_NIGHT_NO)
-private fun Preview() {
+@Preview(
+    name = "SupplyingBuilding Dark",
+    uiMode = UI_MODE_NIGHT_YES
+)
+@Preview(
+    name = "SupplyingBuilding Light",
+    uiMode = UI_MODE_NIGHT_NO
+)
+private fun PreviewSupplyingBuilding() {
     MatiasLevWallboxChallengeTheme {
         LiveDataScreen(
-            state = previewLiveDataScreenMock(),
+            state = previewLiveDataScreenMock(
+                quasarAction = QuasarAction.SupplyingBuilding
+            ),
             animateChart = false,
             onNavigateToHistoricalData = { }
         )
     }
 }
 
-fun previewLiveDataScreenMock() = LiveDataViewModel.ViewState(
+@Composable
+@Preview(
+    name = "ChargingCar Dark",
+    uiMode = UI_MODE_NIGHT_YES
+)
+@Preview(
+    name = "ChargingCar Light",
+    uiMode = UI_MODE_NIGHT_NO
+)
+private fun PreviewChargingCar() {
+    MatiasLevWallboxChallengeTheme {
+        LiveDataScreen(
+            state = previewLiveDataScreenMock(
+                quasarAction = QuasarAction.ChargingCar
+            ),
+            animateChart = false,
+            onNavigateToHistoricalData = { }
+        )
+    }
+}
+
+@Composable
+@Preview(
+    name = "Nothing Dark",
+    uiMode = UI_MODE_NIGHT_YES
+)
+@Preview(
+    name = "Nothing Light",
+    uiMode = UI_MODE_NIGHT_NO
+)
+private fun Preview() {
+    MatiasLevWallboxChallengeTheme {
+        LiveDataScreen(
+            state = previewLiveDataScreenMock(
+                absoluteQuasar = 0.00,
+                quasarAction = QuasarAction.Nothing
+            ),
+            animateChart = false,
+            onNavigateToHistoricalData = { }
+        )
+    }
+}
+
+fun previewLiveDataScreenMock(
+    absoluteQuasar: Double = 38.732,
+    quasarAction: QuasarAction
+) = LiveDataViewModel.ViewState(
     isLoading = false,
-    liveData = MockDomainData.liveDataMock()
+    liveData = MockDomainData.liveDataMock(
+        absoluteQuasar = absoluteQuasar,
+        quasarAction = quasarAction
+    )
 )
