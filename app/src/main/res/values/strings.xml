@@ -3,4 +3,9 @@
     <string name="solar_panels">solar panels</string>
     <string name="from_the_grid">from the grid</string>
     <string name="quasars_supplying_building">quasars supplying building</string>
+    <string name="building_demand">Building Demand</string>
+    <string name="solar_power">Solar Power</string>
+    <string name="grid_power">Grid Power</string>
+    <string name="quasars_charging_card_from_grid">Charging card from grid</string>
+    <string name="quasars_supplying_the_building_demand">Supplying the building demand</string>
 </resources>

@@ -19,7 +19,9 @@ import androidx.navigation.NavController
 import com.example.domain.models.LiveData
 import com.example.matiaslevwallboxchallenge.ui.Screens
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
+import com.example.matiaslevwallboxchallenge.ui.widgets.SourceOfEnergyData
 import com.example.matiaslevwallboxchallenge.ui.widgets.StaticInspectionCompanionProvider
+import com.example.matiaslevwallboxchallenge.ui.widgets.previewLiveDataMock
 import org.koin.androidx.compose.get
 
 @Composable
@@ -54,6 +56,8 @@ fun LiveDataScreen(
             verticalArrangement = Arrangement.Center
         ) {
             state.liveData?.let { liveData ->
+                SourceOfEnergyData(liveData = liveData)
+
                 StaticInspectionCompanionProvider(
                     liveData = liveData,
                     onClick = onNavigateToHistoricalData
@@ -69,19 +73,13 @@ fun LiveDataScreen(
 private fun Preview() {
     MatiasLevWallboxChallengeTheme {
         LiveDataScreen(
-            state = LiveDataViewModel.ViewState(
-                isLoading = false,
-                liveData = LiveData(
-                    solarPower = 7.827,
-                    quasarsPower = -38.732,
-                    gridPower = 80.475,
-                    buildingDemand = 127.03399999999999,
-                    systemSoc = 48.333333333333336,
-                    totalEnergy = 960,
-                    currentEnergy = 464.0
-                )
-            ),
+            state = previewLiveDataScreenMock(),
             onNavigateToHistoricalData = { }
         )
     }
 }
+
+fun previewLiveDataScreenMock() = LiveDataViewModel.ViewState(
+    isLoading = false,
+    liveData = previewLiveDataMock()
+)
