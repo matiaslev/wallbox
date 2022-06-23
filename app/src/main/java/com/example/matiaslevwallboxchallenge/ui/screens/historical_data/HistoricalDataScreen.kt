@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import com.example.domain.mock.MockDomainData
 import com.example.domain.models.HistoricalDataItem
 import com.example.matiaslevwallboxchallenge.R
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
@@ -134,22 +135,7 @@ private fun Preview() {
         HistoricalDataScreen(
             state = HistoricalDataViewModel.ViewState(
                 isLoading = false,
-                historicalData = listOf(
-                    HistoricalDataItem(
-                        buildingActivePower = 40.47342857142857,
-                        gridActivePower = 44.234380952380945,
-                        pvActivePower = 0.0,
-                        quasarsActivePower = 3.7609523809523817,
-                        timestamp = "2021-09-26T22:01:00+00:00"
-                    ),
-                    HistoricalDataItem(
-                        buildingActivePower = 41.04429999999999,
-                        gridActivePower = 47.47763333333334,
-                        pvActivePower = 0.0,
-                        quasarsActivePower = 6.432999999999996,
-                        timestamp = "2021-09-26T22:02:00+00:00"
-                    )
-                )
+                historicalData = MockDomainData.historicalDataMock()
             )
         )
     }

@@ -3,8 +3,7 @@ package com.astropaycard.domain.actions
 import com.astropaycard.domain.base.shouldBeEqualTo
 import com.example.domain.actions.GetLiveData
 import com.example.domain.base.ResultWrapper
-import com.example.domain.models.LiveData
-import com.example.domain.models.QuasarAction
+import com.example.domain.mock.MockDomainData
 import com.example.domain.repositories.ApiRepository
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -33,16 +32,7 @@ class GetLiveDataTest {
     @Test
     fun `should return ResultSuccess when GetLiveData returns Success`() = runTest {
         // given
-        val liveData = LiveData(
-            solarPower = 7.827,
-            absoluteQuasarsPower = 38.732,
-            quasarAction = QuasarAction.SupplyingBuilding,
-            gridPower = 80.475,
-            buildingDemand = 127.03399999999999,
-            systemSoc = 48.333333333333336,
-            totalEnergy = 960,
-            currentEnergy = 464.0
-        )
+        val liveData = MockDomainData.liveDataMock()
         coEvery { apiRepository.getLiveData() } returns ResultWrapper.Success(liveData)
 
         // when

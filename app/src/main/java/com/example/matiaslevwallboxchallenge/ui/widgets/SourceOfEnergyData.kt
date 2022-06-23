@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.domain.mock.MockDomainData
 import com.example.domain.models.LiveData
 import com.example.domain.models.QuasarAction
 import com.example.matiaslevwallboxchallenge.R
@@ -101,7 +101,7 @@ fun SourceOfEnergyData(
 private fun PreviewSupplyingBuilding() {
     MatiasLevWallboxChallengeTheme {
         SourceOfEnergyData(
-            liveData = previewLiveDataMock()
+            liveData = MockDomainData.liveDataMock()
         )
     }
 }
@@ -112,7 +112,7 @@ private fun PreviewSupplyingBuilding() {
 private fun PreviewChargingCar() {
     MatiasLevWallboxChallengeTheme {
         SourceOfEnergyData(
-            liveData = previewLiveDataMock(
+            liveData = MockDomainData.liveDataMock(
                 action = QuasarAction.ChargingCar
             )
         )
@@ -125,24 +125,10 @@ private fun PreviewChargingCar() {
 private fun PreviewNothing() {
     MatiasLevWallboxChallengeTheme {
         SourceOfEnergyData(
-            liveData = previewLiveDataMock(
+            liveData = MockDomainData.liveDataMock(
                 absoluteQuasar = 0.00,
                 action = QuasarAction.Nothing
             )
         )
     }
 }
-
-fun previewLiveDataMock(
-    absoluteQuasar: Double = 38.732,
-    action: QuasarAction = QuasarAction.SupplyingBuilding
-) = LiveData(
-    solarPower = 7.827,
-    absoluteQuasarsPower = absoluteQuasar,
-    quasarAction = action,
-    gridPower = 80.475,
-    buildingDemand = 127.03399999999999,
-    systemSoc = 48.333333333333336,
-    totalEnergy = 960,
-    currentEnergy = 464.0
-)

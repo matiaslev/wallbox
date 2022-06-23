@@ -8,21 +8,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import com.example.domain.models.LiveData
+import com.example.domain.mock.MockDomainData
 import com.example.matiaslevwallboxchallenge.ui.Screens
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
 import com.example.matiaslevwallboxchallenge.ui.widgets.Quasar
 import com.example.matiaslevwallboxchallenge.ui.widgets.SourceOfEnergyData
 import com.example.matiaslevwallboxchallenge.ui.widgets.StaticInspectionCompanionProvider
-import com.example.matiaslevwallboxchallenge.ui.widgets.previewLiveDataMock
 import org.koin.androidx.compose.get
 
 @Composable
@@ -42,6 +39,7 @@ fun LiveDataScreen(
 @Composable
 fun LiveDataScreen(
     state: LiveDataViewModel.ViewState,
+    animateChart: Boolean = true,
     onNavigateToHistoricalData: () -> Unit
 ) {
     AnimatedVisibility(visible = state.isLoading) {
@@ -63,7 +61,8 @@ fun LiveDataScreen(
 
                 StaticInspectionCompanionProvider(
                     liveData = liveData,
-                    onClick = onNavigateToHistoricalData
+                    onClick = onNavigateToHistoricalData,
+                    animateChart = animateChart
                 )
             }
         }
@@ -77,6 +76,7 @@ private fun Preview() {
     MatiasLevWallboxChallengeTheme {
         LiveDataScreen(
             state = previewLiveDataScreenMock(),
+            animateChart = false,
             onNavigateToHistoricalData = { }
         )
     }
@@ -84,5 +84,5 @@ private fun Preview() {
 
 fun previewLiveDataScreenMock() = LiveDataViewModel.ViewState(
     isLoading = false,
-    liveData = previewLiveDataMock()
+    liveData = MockDomainData.liveDataMock()
 )

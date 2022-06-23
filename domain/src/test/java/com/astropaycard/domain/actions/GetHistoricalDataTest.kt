@@ -3,7 +3,7 @@ package com.astropaycard.domain.actions
 import com.astropaycard.domain.base.shouldBeEqualTo
 import com.example.domain.actions.GetHistoricalData
 import com.example.domain.base.ResultWrapper
-import com.example.domain.models.HistoricalDataItem
+import com.example.domain.mock.MockDomainData
 import com.example.domain.repositories.ApiRepository
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -32,22 +32,7 @@ class GetHistoricalDataTest {
     @Test
     fun `should return ResultSuccess when GetHistoricalData returns Success`() = runTest {
         // given
-        val historicalData = listOf(
-            HistoricalDataItem(
-                buildingActivePower = 40.47342857142857,
-                gridActivePower = 44.234380952380945,
-                pvActivePower = 0.0,
-                quasarsActivePower = 3.7609523809523817,
-                timestamp = "2021-09-26T22:01:00+00:00"
-            ),
-            HistoricalDataItem(
-                buildingActivePower = 41.04429999999999,
-                gridActivePower = 47.47763333333334,
-                pvActivePower = 0.0,
-                quasarsActivePower = 6.432999999999996,
-                timestamp = "2021-09-26T22:02:00+00:00"
-            )
-        )
+        val historicalData = MockDomainData.historicalDataMock()
         coEvery { apiRepository.getHistoricalData() } returns ResultWrapper.Success(historicalData)
 
         // when

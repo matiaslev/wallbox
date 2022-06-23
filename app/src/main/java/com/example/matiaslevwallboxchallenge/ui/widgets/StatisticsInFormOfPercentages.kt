@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import com.example.domain.mock.MockDomainData
 import com.example.domain.models.LiveData
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
 import com.github.mikephil.charting.animation.Easing
@@ -78,7 +79,7 @@ fun StaticInspectionCompanionProvider(
 private fun Preview() {
     MatiasLevWallboxChallengeTheme {
         StaticInspectionCompanionProvider(
-            liveData = previewLiveDataMock(),
+            liveData = MockDomainData.liveDataMock(),
             onClick = { },
             animateChart = false
         )
