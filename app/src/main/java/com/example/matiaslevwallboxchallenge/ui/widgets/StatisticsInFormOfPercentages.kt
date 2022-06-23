@@ -41,7 +41,7 @@ fun StaticInspectionCompanionProvider(
                         "" // Not Used
                     ).apply {
                         valueFormatter = PercentFormatter(pieChart)
-                        valueTextSize = 16f
+                        valueTextSize = 18f
                         setColors(Color.YELLOW, Color.GREEN, Color.BLUE)
                     }
                 )
@@ -50,6 +50,7 @@ fun StaticInspectionCompanionProvider(
                 pieChart.description.isEnabled = false
                 pieChart.rotationAngle = 0f
                 pieChart.setEntryLabelColor(Color.BLACK)
+                pieChart.setEntryLabelTextSize(18f)
 
                 pieChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
                     override fun onValueSelected(e: Entry?, h: Highlight?) {
