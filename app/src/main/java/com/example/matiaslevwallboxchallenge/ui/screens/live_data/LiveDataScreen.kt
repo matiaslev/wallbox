@@ -6,6 +6,8 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -17,6 +19,7 @@ import androidx.navigation.NavController
 import com.example.domain.models.LiveData
 import com.example.matiaslevwallboxchallenge.ui.Screens
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
+import com.example.matiaslevwallboxchallenge.ui.widgets.StaticInspectionCompanionProvider
 import org.koin.androidx.compose.get
 
 @Composable
@@ -45,12 +48,19 @@ fun LiveDataScreen(
     AnimatedVisibility(visible = state.isLoading.not()) {
         Column(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
             Button(onClick = onNavigateToHistoricalData) {
                 Text(text = "Navigate")
+            }
+
+            state.liveData?.let { liveData ->
+                StaticInspectionCompanionProvider(
+                    liveData = liveData
+                )
             }
         }
     }
