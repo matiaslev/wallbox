@@ -121,4 +121,23 @@ class LiveDataScreenScreenTest {
         composeTestRule.onNodeWithText(context.getString(R.string.not_charging_car)).assertIsDisplayed()
         composeTestRule.onNodeWithText(context.getString(R.string.not_providing_building)).assertIsDisplayed()
     }
+
+    @Test
+    fun liveData_lastIntention_isBeingAdded() {
+        composeTestRule.setContent {
+            MatiasLevWallboxChallengeTheme {
+                LiveDataScreen(
+                    state = LiveDataViewModel.ViewState(
+                        viewStateType = ViewStateType.NetworkError,
+                        liveData = null
+                    ),
+                    animateChart = false,
+                    onNavigateToHistoricalData = {},
+                    lastIntention = { }
+                )
+            }
+        }
+
+        composeTestRule.onNodeWithText(context.getString(R.string.try_again)).assertIsDisplayed()
+    }
 }

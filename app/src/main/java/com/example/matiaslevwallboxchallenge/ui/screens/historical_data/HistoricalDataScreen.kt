@@ -18,6 +18,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
@@ -112,6 +113,7 @@ fun LineChartView(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
+            .testTag("LineChartView")
             .verticalScroll(rememberScrollState()),
         factory = { context ->
             LineChart(context).apply {

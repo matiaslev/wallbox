@@ -20,7 +20,8 @@ class LiveDataViewModel(
         onGetLiveData()
     }
 
-    fun onGetLiveData() {
+    private fun onGetLiveData() {
+        lastIntention = { onGetLiveData() }
         sendAction(Action.Loading)
         Log.d(viewModelName, getLiveData.name)
         viewModelScope.launch {

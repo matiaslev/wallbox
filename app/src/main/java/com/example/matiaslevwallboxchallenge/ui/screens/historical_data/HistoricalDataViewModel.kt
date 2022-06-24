@@ -20,7 +20,8 @@ class HistoricalDataViewModel(
         onGetHistoricalData()
     }
 
-    fun onGetHistoricalData() {
+    private fun onGetHistoricalData() {
+        lastIntention = { onGetHistoricalData() }
         sendAction(Action.Loading)
         Log.d(viewModelName, getHistoricalData.name)
         viewModelScope.launch {
