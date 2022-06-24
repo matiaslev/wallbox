@@ -3,6 +3,9 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.8">
       <module name="MatiasLevWallboxChallenge.app" target="11" />
+      <module name="MatiasLevWallboxChallenge.buildSrc" target="11" />
+      <module name="MatiasLevWallboxChallenge.buildSrc.main" target="11" />
+      <module name="MatiasLevWallboxChallenge.buildSrc.test" target="11" />
       <module name="MatiasLevWallboxChallenge.data" target="11" />
     </bytecodeTargetLevel>
   </component>
