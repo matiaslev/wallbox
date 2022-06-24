@@ -59,6 +59,7 @@ class ContentStateTest {
         }
 
         composeTestRule.onNodeWithText("should not be shown").assertDoesNotExist()
+        composeTestRule.onNodeWithText(context.getString(R.string.try_again)).assertDoesNotExist()
         composeTestRule.onNodeWithText("error message should be shown").assertIsDisplayed()
 
         /**
@@ -79,6 +80,7 @@ class ContentStateTest {
 
         composeTestRule.onNodeWithText("should not be shown").assertDoesNotExist()
         composeTestRule.onNodeWithText(context.getString(R.string.network_error)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.try_again)).assertDoesNotExist()
 
         /**
          * checking if we are using the correct file for the lottie animation
@@ -103,5 +105,31 @@ class ContentStateTest {
          * checking if we are using the correct file for the lottie animation
          */
         composeTestRule.onNodeWithTag("empty.json").assertIsDisplayed()
+    }
+
+    @Test
+    fun contentState_error_lastIntention() {
+        composeTestRule.setContent {
+            MatiasLevWallboxChallengeTheme {
+                ContentState(state = ViewStateType.Error("error message should be shown"), lastIntention = { }) {
+                    Text(text = "should not be shown")
+                }
+            }
+        }
+
+        composeTestRule.onNodeWithText(context.getString(R.string.try_again)).assertIsDisplayed()
+    }
+
+    @Test
+    fun contentState_NetworkErrorState_lastIntention() {
+        composeTestRule.setContent {
+            MatiasLevWallboxChallengeTheme {
+                ContentState(state = ViewStateType.NetworkError, lastIntention = { }) {
+                    Text(text = "should not be shown")
+                }
+            }
+        }
+
+        composeTestRule.onNodeWithText(context.getString(R.string.try_again)).assertIsDisplayed()
     }
 }
