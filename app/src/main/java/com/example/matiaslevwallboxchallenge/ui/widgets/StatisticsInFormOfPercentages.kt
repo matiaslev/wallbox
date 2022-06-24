@@ -60,9 +60,7 @@ fun StaticInspectionCompanionProvider(
                 pieChart.setEntryLabelColor(Color.BLACK)
                 pieChart.setEntryLabelTextSize(18f)
 
-                pieChart.legend.textColor = if (isDarkMode) {
-                    context.getColor(R.color.white)
-                } else context.getColor(R.color.black)
+                pieChart.legend.textColor = isDarkMode.getTextColor(context)
 
                 pieChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
                     override fun onValueSelected(e: Entry?, h: Highlight?) {

@@ -17,6 +17,7 @@ import com.example.domain.models.HistoricalDataItem
 import com.example.matiaslevwallboxchallenge.R
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
 import com.example.matiaslevwallboxchallenge.ui.widgets.Utils
+import com.example.matiaslevwallboxchallenge.ui.widgets.getTextColor
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -94,10 +95,7 @@ fun LineChartView(
                 )
 
                 xAxis.apply {
-                    textColor = if (isDarkMode) {
-                        context.getColor(R.color.white)
-                    } else context.getColor(R.color.black)
-
+                    textColor = isDarkMode.getTextColor(context)
                     legend.textColor = if (isDarkMode) {
                         context.getColor(R.color.white)
                     } else context.getColor(R.color.black)
@@ -116,10 +114,7 @@ fun LineChartView(
                 }
 
                 axisRight.apply {
-                    textColor = if (isDarkMode) {
-                        context.getColor(R.color.white)
-                    } else context.getColor(R.color.black)
-
+                    textColor = isDarkMode.getTextColor(context)
                     setDrawGridLines(false)
                     valueFormatter = object : ValueFormatter() {
                         override fun getFormattedValue(value: Float): String {
