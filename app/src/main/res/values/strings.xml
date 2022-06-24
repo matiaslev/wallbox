@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">MatiasLevWallboxChallenge</string>
+    <string name="kw_value" translatable="false">%1$s KW</string>
     <string name="solar_panels">solar panels</string>
     <string name="from_the_grid">from the grid</string>
     <string name="quasars_supplying_building">Quasars supplying building</string>
@@ -12,5 +13,5 @@
     <string name="not_charging_car">not charging car</string>
     <string name="empty_text" />
     <string name="not_transfering_energy">Not transferring energy</string>
-    <string name="kw_value" translatable="false">%1$s KW</string>
+    <string name="supplying_building" >supplying building</string>
 </resources>

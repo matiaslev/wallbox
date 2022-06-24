@@ -1,18 +1,36 @@
 package com.example.matiaslevwallboxchallenge.ui.screens.historical_data
 
 import android.content.res.Configuration
-import android.graphics.Color
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.navigation.NavController
 import com.example.domain.mock.MockDomainData
 import com.example.domain.models.HistoricalDataItem
 import com.example.matiaslevwallboxchallenge.R
@@ -34,22 +52,53 @@ import java.time.format.DateTimeFormatter
 
 @Composable
 fun HistoricalDataScreen(
+    navController: NavController,
     viewModel: HistoricalDataViewModel = get()
 ) {
     LaunchedEffect(key1 = viewModel) { viewModel.loadData() }
 
-    HistoricalDataScreen(viewModel.state)
+    HistoricalDataScreen(
+        state = viewModel.state
+    ) {
+        navController.popBackStack()
+    }
 }
 
 @Composable
 fun HistoricalDataScreen(
-    state: HistoricalDataViewModel.ViewState
+    state: HistoricalDataViewModel.ViewState,
+    onBackButtonPressed: () -> Unit
 ) {
-    if (state.historicalData != null) {
-        AnimatedVisibility(visible = state.historicalData.isNotEmpty()) {
-            LineChartView(state.historicalData)
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                backgroundColor = MaterialTheme.colors.surface,
+                elevation = 0.dp,
+                navigationIcon = {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack, null,
+                        modifier = Modifier
+                            .padding(start = 16.dp, end = 16.dp)
+                            .clickable(onClick = onBackButtonPressed)
+                    )
+                },
+                title = {
+                    Text(
+                        text = stringResource(R.string.supplying_building),
+                        style = MaterialTheme.typography.h6
+                    )
+                }
+            )
+        },
+
+        content = {
+            if (state.historicalData != null) {
+                AnimatedVisibility(visible = state.historicalData.isNotEmpty()) {
+                    LineChartView(state.historicalData)
+                }
+            }
         }
-    }
+    )
 }
 
 @Composable
@@ -117,7 +166,7 @@ fun LineChartView(
                                 Instant.ofEpochMilli(value.toLong() * 1000),
                                 ZoneOffset.of("+00:00")
                             )
-                            return getChartDateFormatHourOfDay(date)
+                            return getChartDateFormat(date)
                         }
                     }
                 }
@@ -146,7 +195,7 @@ fun LineChartView(
     )
 }
 
-fun getChartDateFormatHourOfDay(date: LocalDateTime): String {
+fun getChartDateFormat(date: LocalDateTime): String {
     val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM/hh a")
     return date.format(dateTimeFormatter)
 }
@@ -160,7 +209,8 @@ private fun Preview() {
             state = HistoricalDataViewModel.ViewState(
                 isLoading = false,
                 historicalData = MockDomainData.historicalDataMock()
-            )
+            ),
+            onBackButtonPressed = { }
         )
     }
 }

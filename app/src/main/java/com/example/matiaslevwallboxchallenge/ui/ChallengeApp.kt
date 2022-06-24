@@ -34,7 +34,9 @@ fun ChallengeApp() {
                 composable(
                     route = Screens.HistoricalData.name
                 ) {
-                    HistoricalDataScreen()
+                    HistoricalDataScreen(
+                        navController = navController
+                    )
                 }
             }
         }
