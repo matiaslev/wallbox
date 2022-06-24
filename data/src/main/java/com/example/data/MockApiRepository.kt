@@ -10,6 +10,7 @@ import com.example.domain.models.LiveData
 import com.example.domain.repositories.ApiRepository
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.delay
 
 class MockApiRepository(
     private val applicationContext: Context
@@ -17,21 +18,47 @@ class MockApiRepository(
 
     private val gson = Gson()
 
+    private val localSourceOfTruth: LocalInMemorySourceOfTruth = LocalInMemorySourceOfTruth()
+
     override suspend fun getHistoricalData() : ResultWrapper<List<HistoricalDataItem>> {
-        val jsonFileString = getJsonDataFromAsset(applicationContext, "historic_data.json")
-        val type = object : TypeToken<HistoricalDataResponse>() {}.type
+        val historicalData = if (localSourceOfTruth.historicalData == null) {
+            val jsonFileString = getJsonDataFromAsset(applicationContext, "historic_data.json")
+            val type = object : TypeToken<HistoricalDataResponse>() {}.type
 
-        val response: HistoricalDataResponse = gson.fromJson(jsonFileString, type)
+            val response: HistoricalDataResponse = gson.fromJson(jsonFileString, type)
 
-        return ResultWrapper.Success(response.map { it.toDomainModel() })
+            delay(3500)
+
+             response.map { it.toDomainModel() }.apply {
+                 localSourceOfTruth.historicalData = this
+             }
+        } else localSourceOfTruth.historicalData
+        return historicalData?.let {
+            ResultWrapper.Success(it)
+        } ?: ResultWrapper.NetworkError // NetworkError will not happen
     }
 
     override suspend fun getLiveData() : ResultWrapper<LiveData> {
-        val jsonFileString = getJsonDataFromAsset(applicationContext, "live_data.json")
-        val type = object : TypeToken<LiveDataResponse>() {}.type
+        val liveData = if (localSourceOfTruth.liveData == null) {
+            val jsonFileString = getJsonDataFromAsset(applicationContext, "live_data.json")
+            val type = object : TypeToken<LiveDataResponse>() {}.type
 
-        val response: LiveDataResponse = gson.fromJson(jsonFileString, type)
+            val response: LiveDataResponse = gson.fromJson(jsonFileString, type)
 
-        return ResultWrapper.Success(response.toDomainModel())
+            delay(3500)
+
+            response.toDomainModel().apply {
+                localSourceOfTruth.liveData = this
+            }
+        } else localSourceOfTruth.liveData
+
+        return liveData?.let {
+            ResultWrapper.Success(it)
+        } ?: ResultWrapper.NetworkError // NetworkError will not happen
     }
+
+    data class LocalInMemorySourceOfTruth(
+        var historicalData: List<HistoricalDataItem>? = null,
+        var liveData: LiveData? = null
+    )
 }

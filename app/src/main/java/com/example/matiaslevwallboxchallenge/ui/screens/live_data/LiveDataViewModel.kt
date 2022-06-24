@@ -7,6 +7,8 @@ import com.example.domain.models.LiveData
 import com.example.matiaslevwallboxchallenge.ui.base.BaseAction
 import com.example.matiaslevwallboxchallenge.ui.base.BaseViewModel
 import com.example.matiaslevwallboxchallenge.ui.base.BaseViewState
+import com.example.matiaslevwallboxchallenge.ui.widgets.ViewStateType
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class LiveDataViewModel(
@@ -36,17 +38,17 @@ class LiveDataViewModel(
 
     override fun onReduceState(viewAction: Action): ViewState = when(viewAction) {
         Action.Loading -> state.copy(
-            isLoading = true,
+            viewStateType = ViewStateType.Loading,
             liveData = null
         )
         is Action.LiveDataSuccess -> state.copy(
-            isLoading = false,
+            viewStateType = ViewStateType.Success,
             liveData = viewAction.liveData
         )
     }
 
     data class ViewState(
-        val isLoading: Boolean = false,
+        val viewStateType: ViewStateType = ViewStateType.Start,
         val liveData: LiveData? = null
     ) : BaseViewState
 

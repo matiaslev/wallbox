@@ -2,7 +2,6 @@ package com.example.matiaslevwallboxchallenge.ui.screens.live_data
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,10 +16,13 @@ import androidx.navigation.NavController
 import com.example.domain.mock.MockDomainData
 import com.example.domain.models.QuasarAction
 import com.example.matiaslevwallboxchallenge.ui.Screens
+import com.example.matiaslevwallboxchallenge.ui.base.LastIntention
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
+import com.example.matiaslevwallboxchallenge.ui.widgets.ContentState
 import com.example.matiaslevwallboxchallenge.ui.widgets.Quasar
 import com.example.matiaslevwallboxchallenge.ui.widgets.SourceOfEnergyData
 import com.example.matiaslevwallboxchallenge.ui.widgets.StaticInspectionCompanionProvider
+import com.example.matiaslevwallboxchallenge.ui.widgets.ViewStateType
 import org.koin.androidx.compose.get
 
 @Composable
@@ -31,23 +33,23 @@ fun LiveDataScreen(
     LaunchedEffect(key1 = viewModel) { viewModel.loadData() }
 
     LiveDataScreen(
-        state = viewModel.state
-    ) {
-        navController.navigate(Screens.HistoricalData.name)
-    }
+        state = viewModel.state,
+        onNavigateToHistoricalData = { navController.navigate(Screens.HistoricalData.name) },
+        lastIntention = viewModel.lastIntention
+    )
 }
 
 @Composable
 fun LiveDataScreen(
     state: LiveDataViewModel.ViewState,
     animateChart: Boolean = true,
-    onNavigateToHistoricalData: () -> Unit
+    onNavigateToHistoricalData: () -> Unit,
+    lastIntention: LastIntention
 ) {
-    AnimatedVisibility(visible = state.isLoading) {
-
-    }
-
-    AnimatedVisibility(visible = state.isLoading.not()) {
+    ContentState(
+        state = state.viewStateType,
+        lastIntention = lastIntention
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -89,7 +91,8 @@ private fun PreviewSupplyingBuilding() {
                 quasarAction = QuasarAction.SupplyingBuilding
             ),
             animateChart = false,
-            onNavigateToHistoricalData = { }
+            onNavigateToHistoricalData = { },
+            lastIntention = null
         )
     }
 }
@@ -110,7 +113,8 @@ private fun PreviewChargingCar() {
                 quasarAction = QuasarAction.ChargingCar
             ),
             animateChart = false,
-            onNavigateToHistoricalData = { }
+            onNavigateToHistoricalData = { },
+            lastIntention = null
         )
     }
 }
@@ -132,7 +136,8 @@ private fun Preview() {
                 quasarAction = QuasarAction.Nothing
             ),
             animateChart = false,
-            onNavigateToHistoricalData = { }
+            onNavigateToHistoricalData = { },
+            lastIntention = null
         )
     }
 }
@@ -141,7 +146,7 @@ fun previewLiveDataScreenMock(
     absoluteQuasar: Double = 38.732,
     quasarAction: QuasarAction
 ) = LiveDataViewModel.ViewState(
-    isLoading = false,
+    viewStateType = ViewStateType.Success,
     liveData = MockDomainData.liveDataMock(
         absoluteQuasar = absoluteQuasar,
         quasarAction = quasarAction

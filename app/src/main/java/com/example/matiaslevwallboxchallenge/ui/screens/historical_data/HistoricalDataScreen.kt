@@ -4,8 +4,6 @@ import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
@@ -17,25 +15,21 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import com.example.domain.mock.MockDomainData
 import com.example.domain.models.HistoricalDataItem
 import com.example.matiaslevwallboxchallenge.R
+import com.example.matiaslevwallboxchallenge.ui.base.LastIntention
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
+import com.example.matiaslevwallboxchallenge.ui.widgets.ContentState
 import com.example.matiaslevwallboxchallenge.ui.widgets.Utils
+import com.example.matiaslevwallboxchallenge.ui.widgets.ViewStateType
 import com.example.matiaslevwallboxchallenge.ui.widgets.getTextColor
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.LineChart
@@ -58,16 +52,17 @@ fun HistoricalDataScreen(
     LaunchedEffect(key1 = viewModel) { viewModel.loadData() }
 
     HistoricalDataScreen(
-        state = viewModel.state
-    ) {
-        navController.popBackStack()
-    }
+        state = viewModel.state,
+        onBackButtonPressed = { navController.popBackStack() },
+        lastIntention = viewModel.lastIntention
+    )
 }
 
 @Composable
 fun HistoricalDataScreen(
     state: HistoricalDataViewModel.ViewState,
-    onBackButtonPressed: () -> Unit
+    onBackButtonPressed: () -> Unit,
+    lastIntention: LastIntention
 ) {
     Scaffold(
         topBar = {
@@ -92,9 +87,14 @@ fun HistoricalDataScreen(
         },
 
         content = {
-            if (state.historicalData != null) {
-                AnimatedVisibility(visible = state.historicalData.isNotEmpty()) {
-                    LineChartView(state.historicalData)
+            ContentState(
+                state = state.viewStateType,
+                lastIntention = lastIntention
+            ) {
+                if (state.historicalData != null) {
+                    AnimatedVisibility(visible = state.historicalData.isNotEmpty()) {
+                        LineChartView(state.historicalData)
+                    }
                 }
             }
         }
@@ -207,10 +207,11 @@ private fun Preview() {
     MatiasLevWallboxChallengeTheme {
         HistoricalDataScreen(
             state = HistoricalDataViewModel.ViewState(
-                isLoading = false,
+                viewStateType = ViewStateType.Success,
                 historicalData = MockDomainData.historicalDataMock()
             ),
-            onBackButtonPressed = { }
+            onBackButtonPressed = { },
+            lastIntention = null
         )
     }
 }

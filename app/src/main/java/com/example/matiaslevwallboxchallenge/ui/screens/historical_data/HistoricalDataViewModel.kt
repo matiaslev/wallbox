@@ -7,6 +7,7 @@ import com.example.domain.models.HistoricalDataItem
 import com.example.matiaslevwallboxchallenge.ui.base.BaseAction
 import com.example.matiaslevwallboxchallenge.ui.base.BaseViewModel
 import com.example.matiaslevwallboxchallenge.ui.base.BaseViewState
+import com.example.matiaslevwallboxchallenge.ui.widgets.ViewStateType
 import kotlinx.coroutines.launch
 
 class HistoricalDataViewModel(
@@ -36,17 +37,17 @@ class HistoricalDataViewModel(
 
     override fun onReduceState(viewAction: Action): ViewState = when(viewAction) {
         Action.Loading -> state.copy(
-            isLoading = true,
+            viewStateType = ViewStateType.Loading,
             historicalData = null
         )
         is Action.HistoricalDataSuccess -> state.copy(
-            isLoading = true,
+            viewStateType = ViewStateType.Success,
             historicalData = viewAction.historicalData
         )
     }
 
     data class ViewState(
-        val isLoading: Boolean = false,
+        val viewStateType: ViewStateType = ViewStateType.Loading,
         val historicalData: List<HistoricalDataItem>? = null
     ) : BaseViewState
 
