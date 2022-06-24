@@ -154,7 +154,6 @@ fun LineChartView(
                     textColor = isDarkMode.getTextColor(context)
                     textSize = 14f
 
-
                     legend.apply {
                         textColor = isDarkMode.getTextColor(context)
                         textSize = 16f
