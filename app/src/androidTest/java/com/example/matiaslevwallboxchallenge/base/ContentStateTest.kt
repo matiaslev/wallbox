@@ -11,6 +11,7 @@ import com.example.matiaslevwallboxchallenge.R
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
 import com.example.matiaslevwallboxchallenge.ui.widgets.base.ContentState
 import com.example.matiaslevwallboxchallenge.ui.widgets.base.ViewStateType
+import kotlinx.coroutines.delay
 import org.junit.Rule
 import org.junit.Test
 

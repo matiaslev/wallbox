@@ -56,8 +56,6 @@ class MockApiRepository(
         return liveData?.let {
             ResultWrapper.Success(it)
         } ?: ResultWrapper.NetworkError // NetworkError will not happen
-
-        // return ResultWrapper.Error("Something went wrong")
     }
 
     data class LocalInMemorySourceOfTruth(
