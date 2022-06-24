@@ -23,3 +23,7 @@ fun LiveData.toQuasarsPowerPieEntry() = PieEntry(
 fun Boolean.getTextColor(context: Context) = if (this) {
     context.getColor(R.color.white)
 } else context.getColor(R.color.black)
+
+fun Boolean.getPieChartCenterColor(context: Context) = if (this) {
+    context.getColor(R.color.black)
+} else context.getColor(R.color.white)

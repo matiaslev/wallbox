@@ -1,6 +1,7 @@
 package com.example.matiaslevwallboxchallenge.ui.screens.historical_data
 
 import android.content.res.Configuration
+import android.graphics.Color
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +21,7 @@ import com.example.matiaslevwallboxchallenge.ui.widgets.Utils
 import com.example.matiaslevwallboxchallenge.ui.widgets.getTextColor
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -96,9 +98,15 @@ fun LineChartView(
 
                 xAxis.apply {
                     textColor = isDarkMode.getTextColor(context)
-                    legend.textColor = if (isDarkMode) {
-                        context.getColor(R.color.white)
-                    } else context.getColor(R.color.black)
+                    textSize = 14f
+
+
+                    legend.apply {
+                        textColor = isDarkMode.getTextColor(context)
+                        textSize = 16f
+                        isWordWrapEnabled = true
+                        horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+                    }
 
                     setDrawGridLines(false)
                     position = XAxis.XAxisPosition.BOTTOM

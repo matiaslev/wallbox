@@ -54,13 +54,20 @@ fun StaticInspectionCompanionProvider(
                     }
                 )
 
-                pieChart.setUsePercentValues(true)
-                pieChart.description.isEnabled = false
-                pieChart.rotationAngle = 0f
-                pieChart.setEntryLabelColor(Color.BLACK)
-                pieChart.setEntryLabelTextSize(18f)
+                pieChart.apply {
+                    setUsePercentValues(true)
+                    description.isEnabled = false
+                    rotationAngle = 0f
+                    setHoleColor(isDarkMode.getPieChartCenterColor(context))
+                    setEntryLabelColor(isDarkMode.getTextColor(context))
+                    setEntryLabelTextSize(18f)
 
-                pieChart.legend.textColor = isDarkMode.getTextColor(context)
+                    legend.apply {
+                        textColor = isDarkMode.getTextColor(context)
+                        textSize = 16f
+                    }
+                }
+
 
                 pieChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
                     override fun onValueSelected(e: Entry?, h: Highlight?) {
