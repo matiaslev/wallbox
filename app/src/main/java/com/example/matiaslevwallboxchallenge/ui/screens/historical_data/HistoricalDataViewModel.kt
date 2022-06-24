@@ -41,7 +41,7 @@ class HistoricalDataViewModel(
             historicalData = null
         )
         is Action.HistoricalDataSuccess -> state.copy(
-            viewStateType = if (viewAction.historicalData.isNotEmpty()) ViewStateType.Empty else ViewStateType.Success,
+            viewStateType = if (viewAction.historicalData.isEmpty()) ViewStateType.Empty else ViewStateType.Success,
             historicalData = viewAction.historicalData
         )
         is Action.Error -> state.copy(
