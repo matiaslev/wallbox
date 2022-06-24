@@ -13,6 +13,7 @@ import com.example.matiaslevwallboxchallenge.ui.screens.live_data.LiveDataScreen
 import com.example.matiaslevwallboxchallenge.ui.screens.live_data.LiveDataViewModel
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
 import com.example.matiaslevwallboxchallenge.ui.widgets.Utils
+import com.example.matiaslevwallboxchallenge.ui.widgets.base.ViewStateType
 import org.junit.Rule
 import org.junit.Test
 
@@ -31,13 +32,14 @@ class LiveDataScreenScreenTest {
             MatiasLevWallboxChallengeTheme {
                 LiveDataScreen(
                     state = LiveDataViewModel.ViewState(
-                        isLoading = false,
+                        viewStateType = ViewStateType.Success,
                         liveData = MockDomainData.liveDataMock(
                             absoluteQuasar = absoluteQuasar
                         )
                     ),
                     animateChart = false,
-                    onNavigateToHistoricalData = {}
+                    onNavigateToHistoricalData = {},
+                    lastIntention = null
                 )
             }
         }
@@ -66,14 +68,15 @@ class LiveDataScreenScreenTest {
             MatiasLevWallboxChallengeTheme {
                 LiveDataScreen(
                     state = LiveDataViewModel.ViewState(
-                        isLoading = false,
+                        viewStateType = ViewStateType.Success,
                         liveData = MockDomainData.liveDataMock(
                             absoluteQuasar = absoluteQuasar,
                             quasarAction = QuasarAction.ChargingCar
                         )
                     ),
                     animateChart = false,
-                    onNavigateToHistoricalData = {}
+                    onNavigateToHistoricalData = {},
+                    lastIntention = null
                 )
             }
         }
@@ -102,14 +105,15 @@ class LiveDataScreenScreenTest {
             MatiasLevWallboxChallengeTheme {
                 LiveDataScreen(
                     state = LiveDataViewModel.ViewState(
-                        isLoading = false,
+                        viewStateType = ViewStateType.Success,
                         liveData = MockDomainData.liveDataMock(
                             absoluteQuasar = 0.00,
                             quasarAction = QuasarAction.Nothing
                         )
                     ),
                     animateChart = false,
-                    onNavigateToHistoricalData = {}
+                    onNavigateToHistoricalData = {},
+                    lastIntention = null
                 )
             }
         }
