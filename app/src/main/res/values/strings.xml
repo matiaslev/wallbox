@@ -12,4 +12,5 @@
     <string name="not_charging_car">not charging car</string>
     <string name="empty_text" />
     <string name="not_transfering_energy">Not transferring energy</string>
+    <string name="kw_value" translatable="false">%1$s KW</string>
 </resources>

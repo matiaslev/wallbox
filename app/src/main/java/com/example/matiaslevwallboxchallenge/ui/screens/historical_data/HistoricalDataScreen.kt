@@ -2,6 +2,7 @@ package com.example.matiaslevwallboxchallenge.ui.screens.historical_data
 
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -15,6 +16,7 @@ import com.example.domain.mock.MockDomainData
 import com.example.domain.models.HistoricalDataItem
 import com.example.matiaslevwallboxchallenge.R
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
+import com.example.matiaslevwallboxchallenge.ui.widgets.Utils
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -51,6 +53,7 @@ fun HistoricalDataScreen(
 fun LineChartView(
     historicalData: List<HistoricalDataItem>
 ) {
+    val isDarkMode = isSystemInDarkTheme()
     AndroidView(
         modifier = Modifier
             .fillMaxSize()
@@ -91,12 +94,18 @@ fun LineChartView(
                 )
 
                 xAxis.apply {
+                    textColor = if (isDarkMode) {
+                        context.getColor(R.color.white)
+                    } else context.getColor(R.color.black)
+
+                    legend.textColor = if (isDarkMode) {
+                        context.getColor(R.color.white)
+                    } else context.getColor(R.color.black)
+
                     setDrawGridLines(false)
                     position = XAxis.XAxisPosition.BOTTOM
                     valueFormatter = object : ValueFormatter() {
                         override fun getFormattedValue(value: Float): String {
-                            //val date = Instant.ofEpochMilli(value.toLong() * 1000).atZone(ZoneOffset.of("+00:00")).toLocalDate();
-                            // val date = Date(value.toLong() * 1000)
                             val date: LocalDateTime = LocalDateTime.ofInstant(
                                 Instant.ofEpochMilli(value.toLong() * 1000),
                                 ZoneOffset.of("+00:00")
@@ -107,7 +116,19 @@ fun LineChartView(
                 }
 
                 axisRight.apply {
+                    textColor = if (isDarkMode) {
+                        context.getColor(R.color.white)
+                    } else context.getColor(R.color.black)
+
                     setDrawGridLines(false)
+                    valueFormatter = object : ValueFormatter() {
+                        override fun getFormattedValue(value: Float): String {
+                            return context.getString(
+                                R.string.kw_value,
+                                Utils.decimalFormatOnlyShowDecimalIfNotZero.format(value)
+                            )
+                        }
+                    }
                 }
 
                 axisLeft.isEnabled = false

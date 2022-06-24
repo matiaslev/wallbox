@@ -2,6 +2,7 @@ package com.example.matiaslevwallboxchallenge.ui.widgets
 
 import android.content.res.Configuration
 import android.graphics.Color
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -29,6 +30,7 @@ fun StaticInspectionCompanionProvider(
     onClick: () -> Unit,
     animateChart: Boolean = true
 ) {
+    val isDarkMode = isSystemInDarkTheme()
     AndroidView(
         modifier = modifier,
         factory = { context ->
@@ -57,6 +59,10 @@ fun StaticInspectionCompanionProvider(
                 pieChart.rotationAngle = 0f
                 pieChart.setEntryLabelColor(Color.BLACK)
                 pieChart.setEntryLabelTextSize(18f)
+
+                pieChart.legend.textColor = if (isDarkMode) {
+                    context.getColor(R.color.white)
+                } else context.getColor(R.color.black)
 
                 pieChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
                     override fun onValueSelected(e: Entry?, h: Highlight?) {
