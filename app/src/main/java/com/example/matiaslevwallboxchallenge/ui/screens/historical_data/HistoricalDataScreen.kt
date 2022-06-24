@@ -110,6 +110,7 @@ fun LineChartView(
 
                     setDrawGridLines(false)
                     position = XAxis.XAxisPosition.BOTTOM
+                    labelCount = 4
                     valueFormatter = object : ValueFormatter() {
                         override fun getFormattedValue(value: Float): String {
                             val date: LocalDateTime = LocalDateTime.ofInstant(
@@ -146,7 +147,7 @@ fun LineChartView(
 }
 
 fun getChartDateFormatHourOfDay(date: LocalDateTime): String {
-    val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd hh a")
+    val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM/hh a")
     return date.format(dateTimeFormatter)
 }
 
