@@ -160,6 +160,8 @@ fun LineChartView(
                         textSize = 16f
                         isWordWrapEnabled = true
                         horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+                        extraBottomOffset = 16f
+                        extraTopOffset = 16f
                     }
 
                     setDrawGridLines(false)
