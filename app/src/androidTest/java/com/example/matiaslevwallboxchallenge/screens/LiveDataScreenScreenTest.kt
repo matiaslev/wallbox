@@ -1,4 +1,4 @@
-package com.example.matiaslevwallboxchallenge
+package com.example.matiaslevwallboxchallenge.screens
 
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
@@ -8,6 +8,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.domain.mock.MockDomainData
 import com.example.domain.models.QuasarAction
+import com.example.matiaslevwallboxchallenge.R
 import com.example.matiaslevwallboxchallenge.ui.screens.live_data.LiveDataScreen
 import com.example.matiaslevwallboxchallenge.ui.screens.live_data.LiveDataViewModel
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme

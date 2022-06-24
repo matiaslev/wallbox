@@ -7,7 +7,7 @@ import com.example.domain.models.HistoricalDataItem
 import com.example.matiaslevwallboxchallenge.ui.base.BaseAction
 import com.example.matiaslevwallboxchallenge.ui.base.BaseViewModel
 import com.example.matiaslevwallboxchallenge.ui.base.BaseViewState
-import com.example.matiaslevwallboxchallenge.ui.widgets.ViewStateType
+import com.example.matiaslevwallboxchallenge.ui.widgets.base.ViewStateType
 import kotlinx.coroutines.launch
 
 class HistoricalDataViewModel(
@@ -27,22 +27,30 @@ class HistoricalDataViewModel(
             getHistoricalData().also { result ->
                 val action = when (result) {
                     is GetHistoricalData.Result.Success -> Action.HistoricalDataSuccess(result.historicalData)
-                    GetHistoricalData.Result.NetworkError -> TODO()
-                    is GetHistoricalData.Result.ErrorResponse -> TODO()
+                    is GetHistoricalData.Result.ErrorResponse -> Action.Error(result.message)
+                    GetHistoricalData.Result.NetworkError -> Action.NetworkError
                 }
                 sendAction(action)
             }
         }
     }
 
-    override fun onReduceState(viewAction: Action): ViewState = when(viewAction) {
+    override fun onReduceState(viewAction: Action): ViewState = when (viewAction) {
         Action.Loading -> state.copy(
             viewStateType = ViewStateType.Loading,
             historicalData = null
         )
         is Action.HistoricalDataSuccess -> state.copy(
-            viewStateType = ViewStateType.Success,
+            viewStateType = if (viewAction.historicalData.isNotEmpty()) ViewStateType.Empty else ViewStateType.Success,
             historicalData = viewAction.historicalData
+        )
+        is Action.Error -> state.copy(
+            viewStateType = ViewStateType.Error(viewAction.message),
+            historicalData = null
+        )
+        Action.NetworkError -> state.copy(
+            viewStateType = ViewStateType.NetworkError,
+            historicalData = null
         )
     }
 
@@ -54,5 +62,7 @@ class HistoricalDataViewModel(
     sealed class Action : BaseAction {
         object Loading : Action()
         data class HistoricalDataSuccess(val historicalData: List<HistoricalDataItem>) : Action()
+        data class Error(val message: String) : Action()
+        object NetworkError : Action()
     }
 }

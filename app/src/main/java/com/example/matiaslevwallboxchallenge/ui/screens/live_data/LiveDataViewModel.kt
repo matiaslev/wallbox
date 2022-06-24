@@ -7,13 +7,12 @@ import com.example.domain.models.LiveData
 import com.example.matiaslevwallboxchallenge.ui.base.BaseAction
 import com.example.matiaslevwallboxchallenge.ui.base.BaseViewModel
 import com.example.matiaslevwallboxchallenge.ui.base.BaseViewState
-import com.example.matiaslevwallboxchallenge.ui.widgets.ViewStateType
-import kotlinx.coroutines.delay
+import com.example.matiaslevwallboxchallenge.ui.widgets.base.ViewStateType
 import kotlinx.coroutines.launch
 
 class LiveDataViewModel(
     private val getLiveData: GetLiveData
-) : BaseViewModel<LiveDataViewModel.ViewState, LiveDataViewModel.Action>(LiveDataViewModel.ViewState()) {
+) : BaseViewModel<LiveDataViewModel.ViewState, LiveDataViewModel.Action>(ViewState()) {
 
     override val viewModelName: String = LiveDataViewModel::class.java.simpleName
 
@@ -28,8 +27,8 @@ class LiveDataViewModel(
             getLiveData().also { result ->
                 val action = when (result) {
                     is GetLiveData.Result.Success -> Action.LiveDataSuccess(result.liveData)
-                    GetLiveData.Result.NetworkError -> TODO()
-                    is GetLiveData.Result.ErrorResponse -> TODO()
+                    is GetLiveData.Result.ErrorResponse -> Action.Error(result.message)
+                    GetLiveData.Result.NetworkError -> Action.NetworkError
                 }
                 sendAction(action)
             }
@@ -45,6 +44,14 @@ class LiveDataViewModel(
             viewStateType = ViewStateType.Success,
             liveData = viewAction.liveData
         )
+        is Action.Error -> state.copy(
+            viewStateType = ViewStateType.Error(viewAction.message),
+            liveData = null
+        )
+        Action.NetworkError -> state.copy(
+            viewStateType = ViewStateType.NetworkError,
+            liveData = null
+        )
     }
 
     data class ViewState(
@@ -55,5 +62,7 @@ class LiveDataViewModel(
     sealed class Action : BaseAction {
         object Loading : Action()
         data class LiveDataSuccess(val liveData: LiveData) : Action()
+        data class Error(val message: String) : Action()
+        object NetworkError : Action()
     }
 }

@@ -33,9 +33,13 @@ class MockApiRepository(
                  localSourceOfTruth.historicalData = this
              }
         } else localSourceOfTruth.historicalData
-        return historicalData?.let {
+
+        /*return historicalData?.let {
             ResultWrapper.Success(it)
-        } ?: ResultWrapper.NetworkError // NetworkError will not happen
+        } ?: ResultWrapper.NetworkError*/ // NetworkError will not happen
+
+        // return ResultWrapper.Error("Something went wrong")
+        return ResultWrapper.NetworkError
     }
 
     override suspend fun getLiveData() : ResultWrapper<LiveData> {
@@ -55,6 +59,8 @@ class MockApiRepository(
         return liveData?.let {
             ResultWrapper.Success(it)
         } ?: ResultWrapper.NetworkError // NetworkError will not happen
+
+        // return ResultWrapper.Error("Something went wrong")
     }
 
     data class LocalInMemorySourceOfTruth(

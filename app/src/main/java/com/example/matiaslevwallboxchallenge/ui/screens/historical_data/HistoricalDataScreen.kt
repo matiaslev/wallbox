@@ -27,9 +27,9 @@ import com.example.domain.models.HistoricalDataItem
 import com.example.matiaslevwallboxchallenge.R
 import com.example.matiaslevwallboxchallenge.ui.base.LastIntention
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
-import com.example.matiaslevwallboxchallenge.ui.widgets.ContentState
 import com.example.matiaslevwallboxchallenge.ui.widgets.Utils
-import com.example.matiaslevwallboxchallenge.ui.widgets.ViewStateType
+import com.example.matiaslevwallboxchallenge.ui.widgets.base.ContentState
+import com.example.matiaslevwallboxchallenge.ui.widgets.base.ViewStateType
 import com.example.matiaslevwallboxchallenge.ui.widgets.getTextColor
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.LineChart

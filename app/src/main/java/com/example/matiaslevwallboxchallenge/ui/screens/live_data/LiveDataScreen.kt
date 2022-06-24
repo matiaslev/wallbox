@@ -18,11 +18,11 @@ import com.example.domain.models.QuasarAction
 import com.example.matiaslevwallboxchallenge.ui.Screens
 import com.example.matiaslevwallboxchallenge.ui.base.LastIntention
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
-import com.example.matiaslevwallboxchallenge.ui.widgets.ContentState
 import com.example.matiaslevwallboxchallenge.ui.widgets.Quasar
 import com.example.matiaslevwallboxchallenge.ui.widgets.SourceOfEnergyData
 import com.example.matiaslevwallboxchallenge.ui.widgets.StaticInspectionCompanionProvider
-import com.example.matiaslevwallboxchallenge.ui.widgets.ViewStateType
+import com.example.matiaslevwallboxchallenge.ui.widgets.base.ContentState
+import com.example.matiaslevwallboxchallenge.ui.widgets.base.ViewStateType
 import org.koin.androidx.compose.get
 
 @Composable

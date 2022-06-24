@@ -9,7 +9,10 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 
 enum class LottieResources(val file: String) {
-    Loading("loading.json")
+    Loading("loading.json"),
+    Error("error.json"),
+    NetworkError("network_error.json"),
+    Empty("empty.json")
 }
 
 @Composable
