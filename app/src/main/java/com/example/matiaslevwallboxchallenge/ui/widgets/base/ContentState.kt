@@ -5,13 +5,16 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -39,21 +42,16 @@ fun ContentState(
 ) {
     when (state) {
         ViewStateType.Success -> content()
-        ViewStateType.Loading -> {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                LottieLoader(
-                    modifier = Modifier.size(120.dp),
-                    lottieResource = LottieResources.Loading
-                )
-            }
-        }
+        ViewStateType.Loading -> LoadingState()
         ViewStateType.Empty -> EmptyState()
-        is ViewStateType.Error -> ErrorState(message = state.message)
-        ViewStateType.NetworkError -> NetworkErrorState()
+        is ViewStateType.Error -> ErrorState(
+            lastIntention = lastIntention,
+            message = state.message,
+
+        )
+        ViewStateType.NetworkError -> NetworkErrorState(
+            lastIntention = lastIntention
+        )
         ViewStateType.Start -> {
             // Nothing to do here, just wait
         }
@@ -61,8 +59,25 @@ fun ContentState(
 }
 
 @Composable
+fun LoadingState() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        LottieLoader(
+            modifier = Modifier
+                .size(120.dp)
+                .testTag(LottieResources.Loading.file),
+            lottieResource = LottieResources.Loading
+        )
+    }
+}
+
+@Composable
 private fun ErrorState(
-    message: String
+    message: String,
+    lastIntention: LastIntention,
 ) {
     Column(
         modifier = Modifier
@@ -71,7 +86,9 @@ private fun ErrorState(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LottieLoader(
-            modifier = Modifier.size(120.dp),
+            modifier = Modifier
+                .size(120.dp)
+                .testTag(LottieResources.Error.file),
             lottieResource = LottieResources.Error
         )
 
@@ -82,11 +99,24 @@ private fun ErrorState(
             style = MaterialTheme.typography.h6,
             textAlign = TextAlign.Center
         )
+
+        lastIntention?.let { lastIntention ->
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                onClick = lastIntention
+            ) {
+                Text(text = stringResource(id = R.string.try_again))
+            }
+        }
     }
 }
 
 @Composable
-private fun NetworkErrorState() {
+private fun NetworkErrorState(
+    lastIntention: LastIntention
+) {
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -94,7 +124,9 @@ private fun NetworkErrorState() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LottieLoader(
-            modifier = Modifier.size(120.dp),
+            modifier = Modifier
+                .size(120.dp)
+                .testTag(LottieResources.NetworkError.file),
             lottieResource = LottieResources.NetworkError
         )
 
@@ -105,6 +137,17 @@ private fun NetworkErrorState() {
             style = MaterialTheme.typography.h6,
             textAlign = TextAlign.Center
         )
+
+        lastIntention?.let { lastIntention ->
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                onClick = lastIntention
+            ) {
+                Text(text = stringResource(id = R.string.try_again))
+            }
+        }
     }
 }
 
@@ -117,7 +160,9 @@ private fun EmptyState() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LottieLoader(
-            modifier = Modifier.size(120.dp),
+            modifier = Modifier
+                .size(120.dp)
+                .testTag(LottieResources.Empty.file),
             lottieResource = LottieResources.Empty
         )
 
