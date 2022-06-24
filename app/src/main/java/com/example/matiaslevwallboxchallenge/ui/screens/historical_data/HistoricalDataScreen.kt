@@ -1,7 +1,6 @@
 package com.example.matiaslevwallboxchallenge.ui.screens.historical_data
 
 import android.content.res.Configuration
-import android.graphics.Color
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -67,7 +66,7 @@ fun LineChartView(
                         setDrawCircles(false)
                         lineWidth = 3f
                         setDrawFilled(false)
-                        color = Color.YELLOW
+                        color = context.getColor(R.color.solar_energy)
                     },
                     // Grid
                     LineDataSet(
@@ -77,7 +76,7 @@ fun LineChartView(
                         setDrawCircles(false)
                         lineWidth = 3f
                         setDrawFilled(false)
-                        color = Color.GREEN
+                        color = context.getColor(R.color.grid_energy)
                     },
                     // Quasars
                     LineDataSet(
@@ -87,7 +86,7 @@ fun LineChartView(
                         setDrawCircles(false)
                         lineWidth = 3f
                         setDrawFilled(false)
-                        color = Color.BLUE
+                        color = context.getColor(R.color.quasar_energy)
                     },
                 )
 

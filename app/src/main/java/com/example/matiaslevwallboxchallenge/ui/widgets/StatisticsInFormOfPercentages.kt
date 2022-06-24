@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.domain.mock.MockDomainData
 import com.example.domain.models.LiveData
+import com.example.matiaslevwallboxchallenge.R
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
@@ -43,7 +44,11 @@ fun StaticInspectionCompanionProvider(
                     ).apply {
                         valueFormatter = PercentFormatter(pieChart)
                         valueTextSize = 18f
-                        setColors(Color.YELLOW, Color.GREEN, Color.BLUE)
+                        setColors(
+                            context.getColor(R.color.solar_energy),
+                            context.getColor(R.color.grid_energy),
+                            context.getColor(R.color.quasar_energy)
+                        )
                     }
                 )
 
