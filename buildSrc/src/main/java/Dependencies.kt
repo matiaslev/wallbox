@@ -1,6 +1,8 @@
 /**
  * Modules dependencies source of truth
+ * Modules gradle configuration source of truth
  */
+
 object Libs {
 
     object Androidx {
@@ -53,5 +55,17 @@ object Libs {
 
     object DebugImplementation {
         const val uiTooling = "androidx.compose.ui:ui-tooling:1.2.0-rc02"
+        const val uiTest = "androidx.compose.ui:ui-test-manifest:1.2.0-rc02"
     }
+
+    const val gson = "com.google.code.gson:gson:2.9.0"
+}
+
+object Configuration {
+    const val compileSdk = 32
+    const val minSdk = 26
+    const val targetSdk = 32
+    const val versionCode = 1
+    const val versionName = "1.0"
+    const val jvmTarget = "1.8"
 }

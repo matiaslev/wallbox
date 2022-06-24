@@ -5,14 +5,14 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = Configuration.compileSdk
 
     defaultConfig {
         applicationId = "com.example.matiaslevwallboxchallenge"
-        minSdk = 26
-        targetSdk = 32
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = Configuration.minSdk
+        targetSdk = Configuration.targetSdk
+        versionCode = Configuration.versionCode
+        versionName = Configuration.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -34,7 +34,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = Configuration.jvmTarget
     }
     buildFeatures {
         compose = true
@@ -74,5 +74,5 @@ dependencies {
     androidTestImplementation(Libs.Testing.composeUi)
 
     debugImplementation(Libs.DebugImplementation.uiTooling)
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.2.0-rc02")
+    debugImplementation(Libs.DebugImplementation.uiTest)
 }
