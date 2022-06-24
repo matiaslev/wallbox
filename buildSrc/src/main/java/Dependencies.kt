@@ -1,4 +1,6 @@
-
+/**
+ * Modules dependencies source of truth
+ */
 object Libs {
 
     object Androidx {
@@ -22,6 +24,7 @@ object Libs {
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
         const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
+        const val testing = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
     }
 
     const val chart = "com.github.PhilJay:MPAndroidChart:v3.1.0"
@@ -44,6 +47,8 @@ object Libs {
         const val extJunit = "androidx.test.ext:junit:1.1.3"
         const val espresso = "androidx.test.espresso:espresso-core:3.4.0"
         const val composeUi = "androidx.compose.ui:ui-test-junit4:1.2.0-rc02"
+        const val assertj = "org.assertj:assertj-core:3.11.1"
+        const val mockk = "io.mockk:mockk:1.12.1"
     }
 
     object DebugImplementation {
