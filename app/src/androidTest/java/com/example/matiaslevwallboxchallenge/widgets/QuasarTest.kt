@@ -32,6 +32,60 @@ class QuasarTest : BaseAndroidTest() {
             Utils.decimalFormatOnlyShowDecimalIfNotZero.format(
             power
         )).assertIsDisplayed()
+
         composeTestRule.onNodeWithText(context.getString(R.string.not_providing_building)).assertDoesNotExist()
+        composeTestRule.onNodeWithText(context.getString(R.string.quasars_charging_card_from_grid)).assertDoesNotExist()
+        composeTestRule.onNodeWithText(context.getString(R.string.quasars)).assertDoesNotExist()
+    }
+
+    @Test
+    fun quasar_ChargingCar() {
+        composeTestRule.setContent {
+            MatiasLevWallboxChallengeTheme {
+                Quasar(
+                    power = power,
+                    quasarAction = QuasarAction.ChargingCar
+                )
+            }
+        }
+
+        composeTestRule.onNodeWithText(context.getString(R.string.not_providing_building)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.quasars_charging_card_from_grid)).assertIsDisplayed()
+        composeTestRule.onNodeWithText("38.73").assertIsDisplayed()
+        composeTestRule.onNodeWithText(
+            Utils.decimalFormatOnlyShowDecimalIfNotZero.format(
+                power
+            )).assertIsDisplayed()
+
+        composeTestRule.onNodeWithText(context.getString(R.string.quasars_supplying_building)).assertDoesNotExist()
+        composeTestRule.onNodeWithText(context.getString(R.string.not_charging_car)).assertDoesNotExist()
+        composeTestRule.onNodeWithText(context.getString(R.string.quasars)).assertDoesNotExist()
+    }
+
+    @Test
+    fun quasar_Nothing() {
+        composeTestRule.setContent {
+            MatiasLevWallboxChallengeTheme {
+                Quasar(
+                    power = 0.00,
+                    quasarAction = QuasarAction.Nothing
+                )
+            }
+        }
+
+        Thread.sleep(3000)
+
+        composeTestRule.onNodeWithText(context.getString(R.string.quasars)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.not_providing_building)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.not_charging_car)).assertIsDisplayed()
+
+        composeTestRule.onNodeWithText(
+            Utils.decimalFormatOnlyShowDecimalIfNotZero.format(
+                power
+            )).assertDoesNotExist()
+
+        composeTestRule.onNodeWithText(context.getString(R.string.quasars_charging_card_from_grid)).assertDoesNotExist()
+        composeTestRule.onNodeWithText(context.getString(R.string.quasars_supplying_building)).assertDoesNotExist()
+
     }
 }

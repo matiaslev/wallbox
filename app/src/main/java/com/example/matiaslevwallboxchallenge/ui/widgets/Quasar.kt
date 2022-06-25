@@ -38,19 +38,17 @@ fun Quasar(
             verticalArrangement = Arrangement.Center
         ) {
 
-            if (quasarAction != QuasarAction.Nothing) {
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    text = when (quasarAction) {
-                        QuasarAction.ChargingCar -> stringResource(id = R.string.quasars_charging_card_from_grid)
-                        QuasarAction.SupplyingBuilding -> stringResource(id = R.string.quasars_supplying_building)
-                        QuasarAction.Nothing -> stringResource(id = R.string.empty_text) // it's not going to happen, but the when should be exhaustive
-                    },
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.h6
-                )
-            }
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                text = when (quasarAction) {
+                    QuasarAction.ChargingCar -> stringResource(id = R.string.quasars_charging_card_from_grid)
+                    QuasarAction.SupplyingBuilding -> stringResource(id = R.string.quasars_supplying_building)
+                    QuasarAction.Nothing -> stringResource(id = R.string.quasars)
+                },
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.h6
+            )
 
             Row(
                 modifier = modifier
@@ -59,8 +57,14 @@ fun Quasar(
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                QuasarCharged(power = power, quasarAction = quasarAction)
-                QuasarDischarged(power = power, quasarAction = quasarAction)
+                QuasarCharged(
+                    power = power,
+                    quasarAction = quasarAction
+                )
+                QuasarDischarged(
+                    power = power,
+                    quasarAction = quasarAction
+                )
             }
         }
     }
