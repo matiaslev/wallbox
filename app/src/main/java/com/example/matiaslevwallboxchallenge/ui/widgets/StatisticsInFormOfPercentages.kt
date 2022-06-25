@@ -1,7 +1,6 @@
 package com.example.matiaslevwallboxchallenge.ui.widgets
 
 import android.content.res.Configuration
-import android.graphics.Color
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -23,7 +22,7 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 
 @Composable
-fun StaticInspectionCompanionProvider(
+fun StatisticsInFormOfPercentages(
     modifier: Modifier = Modifier
         .size(300.dp),
     liveData: LiveData,
@@ -94,7 +93,7 @@ fun StaticInspectionCompanionProvider(
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
 private fun Preview() {
     MatiasLevWallboxChallengeTheme {
-        StaticInspectionCompanionProvider(
+        StatisticsInFormOfPercentages(
             liveData = MockDomainData.liveDataMock(),
             onClick = { },
             animateChart = false
