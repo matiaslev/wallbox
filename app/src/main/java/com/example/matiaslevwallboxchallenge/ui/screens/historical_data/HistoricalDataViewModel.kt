@@ -1,8 +1,8 @@
 package com.example.matiaslevwallboxchallenge.ui.screens.historical_data
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.domain.actions.GetHistoricalData
+import com.example.domain.logger.Logger
 import com.example.domain.models.HistoricalDataItem
 import com.example.matiaslevwallboxchallenge.ui.base.BaseAction
 import com.example.matiaslevwallboxchallenge.ui.base.BaseViewModel
@@ -11,7 +11,8 @@ import com.example.matiaslevwallboxchallenge.ui.widgets.base.ViewStateType
 import kotlinx.coroutines.launch
 
 class HistoricalDataViewModel(
-    private val getHistoricalData: GetHistoricalData
+    private val getHistoricalData: GetHistoricalData,
+    private val logger: Logger
 ) : BaseViewModel<HistoricalDataViewModel.ViewState, HistoricalDataViewModel.Action>(ViewState()) {
 
     override val viewModelName: String = HistoricalDataViewModel::class.java.simpleName
@@ -23,7 +24,7 @@ class HistoricalDataViewModel(
     private fun onGetHistoricalData() {
         lastIntention = { onGetHistoricalData() }
         sendAction(Action.Loading)
-        Log.d(viewModelName, getHistoricalData.name)
+        logger.setLog(viewModelName, getHistoricalData.name)
         viewModelScope.launch {
             getHistoricalData().also { result ->
                 val action = when (result) {

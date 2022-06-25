@@ -1,8 +1,8 @@
 package com.example.matiaslevwallboxchallenge.ui.screens.live_data
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.domain.actions.GetLiveData
+import com.example.domain.logger.Logger
 import com.example.domain.models.LiveData
 import com.example.matiaslevwallboxchallenge.ui.base.BaseAction
 import com.example.matiaslevwallboxchallenge.ui.base.BaseViewModel
@@ -11,7 +11,8 @@ import com.example.matiaslevwallboxchallenge.ui.widgets.base.ViewStateType
 import kotlinx.coroutines.launch
 
 class LiveDataViewModel(
-    private val getLiveData: GetLiveData
+    private val getLiveData: GetLiveData,
+    private val logger: Logger
 ) : BaseViewModel<LiveDataViewModel.ViewState, LiveDataViewModel.Action>(ViewState()) {
 
     override val viewModelName: String = LiveDataViewModel::class.java.simpleName
@@ -23,7 +24,7 @@ class LiveDataViewModel(
     private fun onGetLiveData() {
         lastIntention = { onGetLiveData() }
         sendAction(Action.Loading)
-        Log.d(viewModelName, getLiveData.name)
+        logger.setLog(viewModelName, getLiveData.name)
         viewModelScope.launch {
             getLiveData().also { result ->
                 val action = when (result) {

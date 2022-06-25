@@ -1,4 +1,4 @@
-package com.astropaycard.domain.base
+package com.example.matiaslevwallboxchallenge.utils
 
 import org.junit.Assert.assertEquals
 

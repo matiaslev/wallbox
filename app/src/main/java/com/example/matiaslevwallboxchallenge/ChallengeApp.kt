@@ -3,6 +3,7 @@ package com.example.matiaslevwallboxchallenge
 import android.app.Application
 import com.example.matiaslevwallboxchallenge.di.actionsModule
 import com.example.matiaslevwallboxchallenge.di.repositoriesModule
+import com.example.matiaslevwallboxchallenge.di.utilsModule
 import com.example.matiaslevwallboxchallenge.di.viewModelsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -19,7 +20,8 @@ class ChallengeApp: Application() {
             modules(listOf(
                 viewModelsModule,
                 actionsModule,
-                repositoriesModule
+                repositoriesModule,
+                utilsModule
             ))
         }
     }

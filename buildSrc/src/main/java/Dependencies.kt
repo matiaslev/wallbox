@@ -51,6 +51,7 @@ object Libs {
         const val composeUi = "androidx.compose.ui:ui-test-junit4:1.2.0-rc02"
         const val assertj = "org.assertj:assertj-core:3.11.1"
         const val mockk = "io.mockk:mockk:1.12.1"
+        const val coreTesting = "androidx.arch.core:core-testing:2.1.0"
     }
 
     object DebugImplementation {

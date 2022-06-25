@@ -69,6 +69,9 @@ dependencies {
     implementation(Libs.Koin.compose)
 
     testImplementation(Libs.Testing.junit)
+    testImplementation(Libs.Testing.mockk)
+    testImplementation(Libs.Coroutines.testing)
+    testImplementation(Libs.Testing.coreTesting)
     androidTestImplementation(Libs.Testing.extJunit)
     androidTestImplementation(Libs.Testing.espresso)
     androidTestImplementation(Libs.Testing.composeUi)

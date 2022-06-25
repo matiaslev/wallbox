@@ -1,6 +1,6 @@
 package com.astropaycard.domain.actions
 
-import com.astropaycard.domain.base.shouldBeEqualTo
+import com.astropaycard.domain.utils.shouldBeEqualTo
 import com.example.domain.actions.GetHistoricalData
 import com.example.domain.base.ResultWrapper
 import com.example.domain.mock.MockDomainData
