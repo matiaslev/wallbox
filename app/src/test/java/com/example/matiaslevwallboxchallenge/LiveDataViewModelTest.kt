@@ -10,13 +10,12 @@ import com.example.matiaslevwallboxchallenge.utils.shouldBeEqualTo
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
 
-@RunWith(JUnit4::class)
+@OptIn(ExperimentalCoroutinesApi::class)
 class LiveDataViewModelTest : BaseTest() {
 
     private lateinit var viewModel: LiveDataViewModel
