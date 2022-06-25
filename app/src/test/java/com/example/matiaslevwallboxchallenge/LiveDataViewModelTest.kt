@@ -34,7 +34,7 @@ class LiveDataViewModelTest : BaseTest() {
     }
 
     @Test
-    fun `should return ResultSuccess when confirmCardDeposit returns Success`() = runTest {
+    fun `should return ResultSuccess when GetLiveData returns Success`() = runTest {
         // given
         val liveData = MockDomainData.liveDataMock()
         coEvery { getLiveData() } returns GetLiveData.Result.Success(liveData)
@@ -46,6 +46,37 @@ class LiveDataViewModelTest : BaseTest() {
         viewModel.state shouldBeEqualTo LiveDataViewModel.ViewState(
             viewStateType = ViewStateType.Success,
             liveData = liveData
+        )
+    }
+
+    @Test
+    fun `should return ResultSuccess when GetLiveData returns Error`() = runTest {
+        // given
+        val message = "error message"
+        coEvery { getLiveData() } returns GetLiveData.Result.ErrorResponse(message)
+
+        // when
+        viewModel.loadData()
+
+        // then
+        viewModel.state shouldBeEqualTo LiveDataViewModel.ViewState(
+            viewStateType = ViewStateType.Error(message),
+            liveData = null
+        )
+    }
+
+    @Test
+    fun `should return ResultSuccess when GetLiveData returns NetworkError`() = runTest {
+        // given
+        coEvery { getLiveData() } returns GetLiveData.Result.NetworkError
+
+        // when
+        viewModel.loadData()
+
+        // then
+        viewModel.state shouldBeEqualTo LiveDataViewModel.ViewState(
+            viewStateType = ViewStateType.NetworkError,
+            liveData = null
         )
     }
 
