@@ -1,25 +1,18 @@
 package com.example.matiaslevwallboxchallenge.base
 
 import androidx.compose.material.Text
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.compose.ui.test.performClick
 import com.example.matiaslevwallboxchallenge.R
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
 import com.example.matiaslevwallboxchallenge.ui.widgets.base.ContentState
 import com.example.matiaslevwallboxchallenge.ui.widgets.base.ViewStateType
-import kotlinx.coroutines.delay
-import org.junit.Rule
+import com.example.matiaslevwallboxchallenge.utils.BaseAndroidTest
 import org.junit.Test
 
-class ContentStateTest {
-    @get:Rule
-    val composeTestRule = createComposeRule()
-
-    private val context = InstrumentationRegistry.getInstrumentation().targetContext
+class ContentStateTest : BaseAndroidTest() {
 
     @Test
     fun contentState_Loading() {
@@ -111,7 +104,10 @@ class ContentStateTest {
     fun contentState_error_lastIntention() {
         composeTestRule.setContent {
             MatiasLevWallboxChallengeTheme {
-                ContentState(state = ViewStateType.Error("error message should be shown"), lastIntention = { }) {
+                ContentState(
+                    state = ViewStateType.Error("error message should be shown"),
+                    lastIntention = { }
+                ) {
                     Text(text = "should not be shown")
                 }
             }

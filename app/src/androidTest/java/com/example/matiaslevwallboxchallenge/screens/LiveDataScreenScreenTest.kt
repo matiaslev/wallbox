@@ -2,10 +2,8 @@ package com.example.matiaslevwallboxchallenge.screens
 
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
-import androidx.test.platform.app.InstrumentationRegistry
 import com.example.domain.mock.MockDomainData
 import com.example.domain.models.QuasarAction
 import com.example.matiaslevwallboxchallenge.R
@@ -14,15 +12,10 @@ import com.example.matiaslevwallboxchallenge.ui.screens.live_data.LiveDataViewMo
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
 import com.example.matiaslevwallboxchallenge.ui.widgets.Utils
 import com.example.matiaslevwallboxchallenge.ui.widgets.base.ViewStateType
-import org.junit.Rule
+import com.example.matiaslevwallboxchallenge.utils.BaseAndroidTest
 import org.junit.Test
 
-class LiveDataScreenScreenTest {
-
-    @get:Rule
-    val composeTestRule = createComposeRule()
-
-    private val context = InstrumentationRegistry.getInstrumentation().targetContext
+class LiveDataScreenScreenTest : BaseAndroidTest() {
 
     private val absoluteQuasar = 38.732
 
@@ -94,7 +87,6 @@ class LiveDataScreenScreenTest {
          * Draw once in Quasar Widget and once in SourceOfEnergyData Widget
          */
         composeTestRule.onAllNodesWithText(context.getString(R.string.quasars_charging_card_from_grid)).assertCountEquals(2)
-
 
         composeTestRule.onNodeWithText(context.getString(R.string.not_providing_building)).assertIsDisplayed()
     }

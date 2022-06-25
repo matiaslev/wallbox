@@ -1,25 +1,18 @@
 package com.example.matiaslevwallboxchallenge.screens
 
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
-import androidx.test.platform.app.InstrumentationRegistry
 import com.example.domain.mock.MockDomainData
 import com.example.matiaslevwallboxchallenge.R
 import com.example.matiaslevwallboxchallenge.ui.screens.historical_data.HistoricalDataScreen
 import com.example.matiaslevwallboxchallenge.ui.screens.historical_data.HistoricalDataViewModel
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
 import com.example.matiaslevwallboxchallenge.ui.widgets.base.ViewStateType
-import org.junit.Rule
+import com.example.matiaslevwallboxchallenge.utils.BaseAndroidTest
 import org.junit.Test
 
-class HistoricalDataScreenTest {
-
-    @get:Rule
-    val composeTestRule = createComposeRule()
-
-    private val context = InstrumentationRegistry.getInstrumentation().targetContext
+class HistoricalDataScreenTest : BaseAndroidTest() {
 
     @Test
     fun historicalData_LineChartView_isDisplayed() {
