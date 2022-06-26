@@ -1,4 +1,4 @@
-package com.example.matiaslevwallboxchallenge
+package com.example.matiaslevwallboxchallenge.view_models
 
 import com.example.domain.actions.GetLiveData
 import com.example.domain.logger.Logger

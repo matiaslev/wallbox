@@ -1,11 +1,9 @@
-package com.example.matiaslevwallboxchallenge
+package com.example.matiaslevwallboxchallenge.view_models
 
 import com.example.domain.actions.GetHistoricalData
-import com.example.domain.actions.GetLiveData
 import com.example.domain.logger.Logger
 import com.example.domain.mock.MockDomainData
 import com.example.matiaslevwallboxchallenge.ui.screens.historical_data.HistoricalDataViewModel
-import com.example.matiaslevwallboxchallenge.ui.screens.live_data.LiveDataViewModel
 import com.example.matiaslevwallboxchallenge.ui.widgets.base.ViewStateType
 import com.example.matiaslevwallboxchallenge.utils.BaseTest
 import com.example.matiaslevwallboxchallenge.utils.shouldBeEqualTo

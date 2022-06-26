@@ -7,12 +7,14 @@ import com.example.domain.models.QuasarAction
 object MockDomainData {
     fun liveDataMock(
         absoluteQuasar: Double = 38.732,
-        quasarAction: QuasarAction = QuasarAction.SupplyingBuilding
+        quasarAction: QuasarAction = QuasarAction.SupplyingBuilding,
+        solarPower: Double = 7.827,
+        gridPower: Double = 80.475,
     ) = LiveData(
-        solarPower = 7.827,
+        solarPower = solarPower,
         absoluteQuasarsPower = absoluteQuasar,
         quasarAction = quasarAction,
-        gridPower = 80.475,
+        gridPower = gridPower,
         buildingDemand = 127.03399999999999,
         systemSoc = 48.333333333333336,
         totalEnergy = 960,

@@ -16,26 +16,26 @@ fun LiveData.getPieChartPowerValues(): List<PieEntry> {
     return values
 }
 
-fun LiveData.toSolarPowerPieEntry() = PieEntry(
+private fun LiveData.toSolarPowerPieEntry() = PieEntry(
     solarPower.toFloat(),
     "Solar Power"
 )
 
-fun LiveData.shouldAddSolarPower() = solarPower > 0
+private fun LiveData.shouldAddSolarPower() = solarPower > 0
 
-fun LiveData.toGridPowerPieEntry() = PieEntry(
+private fun LiveData.toGridPowerPieEntry() = PieEntry(
     gridPower.toFloat(),
     "Grid Power"
 )
 
-fun LiveData.shouldAddGridPower() = gridPower > 0
+private fun LiveData.shouldAddGridPower() = gridPower > 0
 
-fun LiveData.toQuasarsPowerPieEntry() = PieEntry(
+private fun LiveData.toQuasarsPowerPieEntry() = PieEntry(
     absoluteQuasarsPower.toFloat(),
     "Quasar Power"
 )
 
-fun LiveData.shouldAddQuasarsPower() =
+private fun LiveData.shouldAddQuasarsPower() =
     quasarAction == QuasarAction.SupplyingBuilding && absoluteQuasarsPower > 0
 
 fun Boolean.getTextColor(context: Context) = if (this) {
