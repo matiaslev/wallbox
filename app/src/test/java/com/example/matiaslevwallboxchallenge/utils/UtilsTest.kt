@@ -35,4 +35,11 @@ class UtilsTest {
         formattedValue shouldBeEqualTo "80.47"
     }
 
+    @Test
+    fun utils_decimalFormatOnlyShowDecimalIfNotZero_test_case_4() {
+        val formattedValue = Utils.decimalFormatOnlyShowDecimalIfNotZero.format(80.4756)
+
+        formattedValue shouldBeEqualTo "80.48"
+    }
+
 }

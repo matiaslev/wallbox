@@ -163,7 +163,7 @@ fun LineChartView(
                         extraTopOffset = 16f
                     }
 
-                    setDrawGridLines(false)
+                    setDrawGridLines(true)
                     position = XAxis.XAxisPosition.BOTTOM
                     labelCount = 4
                     valueFormatter = object : ValueFormatter() {
@@ -179,7 +179,7 @@ fun LineChartView(
 
                 axisRight.apply {
                     textColor = isDarkMode.getTextColor(context)
-                    setDrawGridLines(false)
+                    setDrawGridLines(true)
                     valueFormatter = object : ValueFormatter() {
                         override fun getFormattedValue(value: Float): String {
                             return context.getString(
