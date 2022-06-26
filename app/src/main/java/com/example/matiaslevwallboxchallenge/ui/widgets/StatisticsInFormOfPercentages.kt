@@ -37,7 +37,7 @@ fun StatisticsInFormOfPercentages(
             PieChart(context).also { pieChart ->
                 pieChart.data = PieData(
                     PieDataSet(
-                        liveData.getPieChartPowerValues(),
+                        liveData.getPieChartPowerValues(context),
                         "" // Not Used
                     ).apply {
                         valueFormatter = PercentFormatter(pieChart)

@@ -6,33 +6,33 @@ import com.example.domain.models.QuasarAction
 import com.example.matiaslevwallboxchallenge.R
 import com.github.mikephil.charting.data.PieEntry
 
-fun LiveData.getPieChartPowerValues(): List<PieEntry> {
+fun LiveData.getPieChartPowerValues(context: Context): List<PieEntry> {
     val values = mutableListOf<PieEntry>()
 
-    if (shouldAddSolarPower()) values.add(toSolarPowerPieEntry())
-    if (shouldAddGridPower()) values.add(toGridPowerPieEntry())
-    if (shouldAddQuasarsPower()) values.add(toQuasarsPowerPieEntry())
+    if (shouldAddSolarPower()) values.add(toSolarPowerPieEntry(context))
+    if (shouldAddGridPower()) values.add(toGridPowerPieEntry(context))
+    if (shouldAddQuasarsPower()) values.add(toQuasarsPowerPieEntry(context))
 
     return values
 }
 
-private fun LiveData.toSolarPowerPieEntry() = PieEntry(
+private fun LiveData.toSolarPowerPieEntry(context: Context) = PieEntry(
     solarPower.toFloat(),
-    "Solar Power"
+    context.getString(R.string.solar_power)
 )
 
 private fun LiveData.shouldAddSolarPower() = solarPower > 0
 
-private fun LiveData.toGridPowerPieEntry() = PieEntry(
+private fun LiveData.toGridPowerPieEntry(context: Context) = PieEntry(
     gridPower.toFloat(),
-    "Grid Power"
+    context.getString(R.string.grid_power)
 )
 
 private fun LiveData.shouldAddGridPower() = gridPower > 0
 
-private fun LiveData.toQuasarsPowerPieEntry() = PieEntry(
+private fun LiveData.toQuasarsPowerPieEntry(context: Context) = PieEntry(
     absoluteQuasarsPower.toFloat(),
-    "Quasar Power"
+    context.getString(R.string.quasars_supplying_building)
 )
 
 private fun LiveData.shouldAddQuasarsPower() =
