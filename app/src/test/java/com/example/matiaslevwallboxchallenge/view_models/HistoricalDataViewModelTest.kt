@@ -5,8 +5,8 @@ import com.example.domain.logger.Logger
 import com.example.domain.mock.MockDomainData
 import com.example.matiaslevwallboxchallenge.ui.screens.historical_data.HistoricalDataViewModel
 import com.example.matiaslevwallboxchallenge.ui.widgets.base.ViewStateType
-import com.example.matiaslevwallboxchallenge.utils.BaseTest
-import com.example.matiaslevwallboxchallenge.utils.shouldBeEqualTo
+import com.example.matiaslevwallboxchallenge.helper.BaseTest
+import com.example.matiaslevwallboxchallenge.helper.shouldBeEqualTo
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK

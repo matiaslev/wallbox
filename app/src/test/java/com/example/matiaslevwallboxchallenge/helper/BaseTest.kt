@@ -1,4 +1,4 @@
-package com.example.matiaslevwallboxchallenge.utils
+package com.example.matiaslevwallboxchallenge.helper
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi

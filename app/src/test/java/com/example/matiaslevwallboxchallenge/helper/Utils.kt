@@ -1,4 +1,4 @@
-package com.example.matiaslevwallboxchallenge.utils
+package com.example.matiaslevwallboxchallenge.helper
 
 import org.junit.Assert.assertEquals
 

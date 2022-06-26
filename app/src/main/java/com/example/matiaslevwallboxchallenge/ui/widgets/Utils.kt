@@ -11,7 +11,7 @@ object Utils {
     val decimalFormatOnlyShowDecimalIfNotZero: DecimalFormat
         get() {
             nf.isDecimalSeparatorAlwaysShown = false
-            nf.roundingMode = RoundingMode.DOWN
+            nf.roundingMode = RoundingMode.HALF_DOWN
             return nf
         }
 }

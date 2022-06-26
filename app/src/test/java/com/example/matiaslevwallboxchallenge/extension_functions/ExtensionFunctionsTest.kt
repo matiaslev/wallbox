@@ -4,7 +4,7 @@ import android.content.Context
 import com.example.domain.mock.MockDomainData
 import com.example.domain.models.QuasarAction
 import com.example.matiaslevwallboxchallenge.ui.widgets.getPieChartPowerValues
-import com.example.matiaslevwallboxchallenge.utils.shouldBeEqualTo
+import com.example.matiaslevwallboxchallenge.helper.shouldBeEqualTo
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.MockK
 import org.junit.Before
