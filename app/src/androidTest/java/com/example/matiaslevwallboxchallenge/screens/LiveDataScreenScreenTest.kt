@@ -43,7 +43,7 @@ class LiveDataScreenScreenTest : BaseAndroidTest() {
         composeTestRule.onAllNodesWithText(
             Utils.decimalFormatOnlyShowDecimalIfNotZero.format(
                 absoluteQuasar
-            )
+            ) + context.getString(R.string.kw)
         ).assertCountEquals(2)
 
         /**
@@ -80,7 +80,7 @@ class LiveDataScreenScreenTest : BaseAndroidTest() {
         composeTestRule.onAllNodesWithText(
             Utils.decimalFormatOnlyShowDecimalIfNotZero.format(
                 absoluteQuasar
-            )
+            ) + context.getString(R.string.kw)
         ).assertCountEquals(2)
 
         /**

@@ -14,9 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.domain.models.QuasarAction
 import com.example.matiaslevwallboxchallenge.R
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
@@ -37,14 +42,20 @@ fun QuasarDischarged(
         if (quasarAction == QuasarAction.SupplyingBuilding) {
             Text(
                 modifier = Modifier,
-                text = Utils.decimalFormatOnlyShowDecimalIfNotZero.format(power),
+                text = buildAnnotatedString {
+                    append(Utils.decimalFormatOnlyShowDecimalIfNotZero.format(power))
+                    withStyle(style = SpanStyle(fontSize = 8.sp, fontWeight = FontWeight.Bold)) {
+                        append(stringResource(id = R.string.kw))
+                    }
+                },
                 style = MaterialTheme.typography.h4
             )
         } else {
             Text(
                 text = stringResource(id = R.string.not_providing_building),
                 color = Color.White,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.h6
             )
         }
     }

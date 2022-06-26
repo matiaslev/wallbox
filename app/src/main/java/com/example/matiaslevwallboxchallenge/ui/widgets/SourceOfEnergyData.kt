@@ -12,8 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.domain.mock.MockDomainData
 import com.example.domain.models.LiveData
 import com.example.domain.models.QuasarAction
@@ -43,7 +48,12 @@ fun SourceOfEnergyData(
             ) {
                 Text(text = stringResource(id = R.string.building_demand))
                 Text(
-                    text = Utils.decimalFormatOnlyShowDecimalIfNotZero.format(liveData.buildingDemand)
+                    text = buildAnnotatedString {
+                        append(Utils.decimalFormatOnlyShowDecimalIfNotZero.format(liveData.buildingDemand))
+                        withStyle(style = SpanStyle(fontSize = 10.sp, fontWeight = FontWeight.Bold)) {
+                            append(stringResource(id = R.string.kw))
+                        }
+                    }
                 )
             }
 
@@ -61,7 +71,12 @@ fun SourceOfEnergyData(
                     }
                 )
                 Text(
-                    text =  Utils.decimalFormatOnlyShowDecimalIfNotZero.format(liveData.absoluteQuasarsPower)
+                    text = buildAnnotatedString {
+                        append(Utils.decimalFormatOnlyShowDecimalIfNotZero.format(liveData.absoluteQuasarsPower))
+                        withStyle(style = SpanStyle(fontSize = 10.sp, fontWeight = FontWeight.Bold)) {
+                            append(stringResource(id = R.string.kw))
+                        }
+                    }
                 )
             }
 
@@ -77,7 +92,12 @@ fun SourceOfEnergyData(
                         text = stringResource(id = R.string.solar_power)
                     )
                     Text(
-                        text = Utils.decimalFormatOnlyShowDecimalIfNotZero.format(liveData.solarPower)
+                        text = buildAnnotatedString {
+                            append(Utils.decimalFormatOnlyShowDecimalIfNotZero.format(liveData.solarPower))
+                            withStyle(style = SpanStyle(fontSize = 10.sp, fontWeight = FontWeight.Bold)) {
+                                append(stringResource(id = R.string.kw))
+                            }
+                        }
                     )
                 }
                 Row {
@@ -87,7 +107,12 @@ fun SourceOfEnergyData(
                         text = stringResource(id = R.string.grid_power)
                     )
                     Text(
-                        text = Utils.decimalFormatOnlyShowDecimalIfNotZero.format(liveData.gridPower)
+                        text = buildAnnotatedString {
+                            append(Utils.decimalFormatOnlyShowDecimalIfNotZero.format(liveData.gridPower))
+                            withStyle(style = SpanStyle(fontSize = 10.sp, fontWeight = FontWeight.Bold)) {
+                                append(stringResource(id = R.string.kw))
+                            }
+                        }
                     )
                 }
             }
@@ -96,8 +121,8 @@ fun SourceOfEnergyData(
 }
 
 @Composable
-@Preview(name = "Quasar Action SupplyingBuilding",uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Preview(name = "Quasar Action SupplyingBuilding",uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Preview(name = "Quasar Action SupplyingBuilding", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "Quasar Action SupplyingBuilding", uiMode = Configuration.UI_MODE_NIGHT_NO)
 private fun PreviewSupplyingBuilding() {
     MatiasLevWallboxChallengeTheme {
         SourceOfEnergyData(
@@ -107,8 +132,8 @@ private fun PreviewSupplyingBuilding() {
 }
 
 @Composable
-@Preview(name = "Quasar Action ChargingCar",uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Preview(name = "Quasar Action ChargingCar",uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Preview(name = "Quasar Action ChargingCar", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "Quasar Action ChargingCar", uiMode = Configuration.UI_MODE_NIGHT_NO)
 private fun PreviewChargingCar() {
     MatiasLevWallboxChallengeTheme {
         SourceOfEnergyData(

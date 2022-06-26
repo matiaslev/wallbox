@@ -71,6 +71,6 @@ class SourceOfEnergyDataTest : BaseAndroidTest() {
         composeTestRule.onNodeWithText(context.getString(R.string.quasars_supplying_building)).assertDoesNotExist()
         composeTestRule.onNodeWithText(context.getString(R.string.quasars_charging_card_from_grid)).assertDoesNotExist()
         composeTestRule.onNodeWithText(context.getString(R.string.not_transfering_energy)).assertIsDisplayed()
-        composeTestRule.onNodeWithText("0").assertIsDisplayed()
+        composeTestRule.onNodeWithText("0" + context.getString(R.string.kw)).assertIsDisplayed()
     }
 }

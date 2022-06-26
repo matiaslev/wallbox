@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">MatiasLevWallboxChallenge</string>
-    <string name="kw_value" translatable="false">%1$s KW</string>
+    <string name="kw_value" translatable="false">%1$s Kw</string>
     <string name="two_values" translatable="false">%1$s %2$s</string>
     <string name="solar_panels">solar panels</string>
     <string name="from_the_grid">from the grid</string>
@@ -23,4 +23,5 @@
     <string name="try_again">try again</string>
     <string name="state_of_your_energy">State of your energy</string>
     <string name="quasars">Quasars</string>
+    <string name="kw">&#160;Kw</string>
 </resources>

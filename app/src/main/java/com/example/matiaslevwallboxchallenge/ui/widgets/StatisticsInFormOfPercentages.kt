@@ -57,6 +57,7 @@ fun StatisticsInFormOfPercentages(
                     setHoleColor(isDarkMode.getPieChartCenterColor(context))
                     setEntryLabelColor(isDarkMode.getTextColor(context))
                     setEntryLabelTextSize(18f)
+                    setDrawEntryLabels(isDarkMode.not())
 
                     legend.apply {
                         textColor = isDarkMode.getTextColor(context)

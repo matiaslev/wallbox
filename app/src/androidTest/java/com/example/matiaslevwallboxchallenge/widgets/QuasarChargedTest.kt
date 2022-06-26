@@ -29,7 +29,8 @@ class QuasarChargedTest : BaseAndroidTest() {
         composeTestRule.onNodeWithText(
             Utils.decimalFormatOnlyShowDecimalIfNotZero.format(
                 power
-            )).assertIsDisplayed()
+            ) + context.getString(R.string.kw)
+        ).assertIsDisplayed()
     }
 
     @Test
