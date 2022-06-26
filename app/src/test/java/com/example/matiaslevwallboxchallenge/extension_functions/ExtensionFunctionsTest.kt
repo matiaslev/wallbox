@@ -9,8 +9,6 @@ import org.junit.Test
 
 class ExtensionFunctionsTest {
 
-
-
     @Test
     fun getPieChartPowerValues_not_shouldAddValues_whenAreZero() {
         val liveData = MockDomainData.liveDataMock(
