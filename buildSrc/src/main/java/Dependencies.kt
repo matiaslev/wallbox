@@ -19,6 +19,7 @@ object Libs {
 
         const val core = "androidx.core:core-ktx:1.8.0"
         const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+        const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
     }
 
     object Coroutines {

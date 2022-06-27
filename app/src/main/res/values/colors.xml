@@ -6,4 +6,5 @@
     <color name="solar_energy">#FFFEF848</color>
     <color name="grid_energy">#FFfe8828</color>
     <color name="quasar_energy">#FF13D8B5</color>
+    <color name="line_chart_marker_text">@color/black</color>
 </resources>

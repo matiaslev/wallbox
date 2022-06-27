@@ -1,6 +1,7 @@
 package com.example.matiaslevwallboxchallenge.ui.screens.historical_data
 
 import android.content.res.Configuration
+import android.view.MotionEvent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -30,6 +31,7 @@ import com.example.domain.models.HistoricalDataItem
 import com.example.matiaslevwallboxchallenge.R
 import com.example.matiaslevwallboxchallenge.ui.base.LastIntention
 import com.example.matiaslevwallboxchallenge.ui.theme.MatiasLevWallboxChallengeTheme
+import com.example.matiaslevwallboxchallenge.ui.widgets.HistoricalDataMarker
 import com.example.matiaslevwallboxchallenge.ui.widgets.Utils
 import com.example.matiaslevwallboxchallenge.ui.widgets.base.ContentState
 import com.example.matiaslevwallboxchallenge.ui.widgets.base.ViewStateType
@@ -168,11 +170,7 @@ fun LineChartView(
                     labelCount = 4
                     valueFormatter = object : ValueFormatter() {
                         override fun getFormattedValue(value: Float): String {
-                            val date: LocalDateTime = LocalDateTime.ofInstant(
-                                Instant.ofEpochMilli(value.toLong() * 1000),
-                                ZoneOffset.of("+00:00")
-                            )
-                            return getChartDateFormat(date)
+                            return getChartDateFormat(value.epochToformattedLineChartDateTime())
                         }
                     }
                 }
@@ -194,6 +192,12 @@ fun LineChartView(
                 setDrawBorders(false)
 
                 description.text = ""
+
+                setScaleEnabled(false)
+                marker = HistoricalDataMarker(
+                    context  = context,
+                    layoutResource =  R.layout.fragment_historical_data_marker
+                )
 
                 animateX(1400, Easing.EaseInOutQuad)
             }
