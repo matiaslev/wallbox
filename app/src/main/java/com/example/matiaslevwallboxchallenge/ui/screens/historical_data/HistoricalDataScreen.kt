@@ -1,7 +1,6 @@
 package com.example.matiaslevwallboxchallenge.ui.screens.historical_data
 
 import android.content.res.Configuration
-import android.view.MotionEvent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -44,9 +43,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import org.koin.androidx.compose.get
-import java.time.Instant
 import java.time.LocalDateTime
-import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
 @Composable
@@ -154,7 +151,7 @@ fun LineChartView(
 
                 xAxis.apply {
                     textColor = isDarkMode.getTextColor(context)
-                    textSize = 14f
+                    textSize = 12f
 
                     legend.apply {
                         textColor = isDarkMode.getTextColor(context)
@@ -170,7 +167,7 @@ fun LineChartView(
                     labelCount = 4
                     valueFormatter = object : ValueFormatter() {
                         override fun getFormattedValue(value: Float): String {
-                            return getChartDateFormat(value.epochToformattedLineChartDateTime())
+                            return value.epochToFormattedLineChartDateTime().getChartDateFormat(context)
                         }
                     }
                 }
@@ -203,11 +200,6 @@ fun LineChartView(
             }
         }
     )
-}
-
-fun getChartDateFormat(date: LocalDateTime): String {
-    val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM/hh a")
-    return date.format(dateTimeFormatter)
 }
 
 @Composable

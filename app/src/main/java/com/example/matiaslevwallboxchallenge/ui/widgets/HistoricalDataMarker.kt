@@ -5,7 +5,7 @@ import android.graphics.Canvas
 import android.util.AttributeSet
 import android.widget.TextView
 import com.example.matiaslevwallboxchallenge.R
-import com.example.matiaslevwallboxchallenge.ui.screens.historical_data.epochToformattedLineChartDateTime
+import com.example.matiaslevwallboxchallenge.ui.screens.historical_data.epochToFormattedLineChartDateTime
 import com.example.matiaslevwallboxchallenge.ui.screens.historical_data.getChartDateFormat
 import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.data.Entry
@@ -23,7 +23,7 @@ class HistoricalDataMarker(
     override fun refreshContent(e: Entry?, highlight: Highlight?) {
         e?.let { entry ->
             findViewById<TextView>(R.id.dateTime).apply {
-                text =  getChartDateFormat(entry.x.epochToformattedLineChartDateTime())
+                text =  entry.x.epochToFormattedLineChartDateTime().getChartDateFormat(context)
             }
 
             findViewById<TextView>(R.id.kw).apply {

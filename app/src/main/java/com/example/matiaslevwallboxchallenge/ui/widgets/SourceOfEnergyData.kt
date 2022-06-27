@@ -100,7 +100,7 @@ fun SourceOfEnergyData(
                 Row {
                     Text(
                         modifier = Modifier
-                            .padding(end = 16.dp),
+                            .padding(end = 8.dp),
                         text = stringResource(id = R.string.solar_power)
                     )
                     Text(
@@ -115,7 +115,7 @@ fun SourceOfEnergyData(
                 Row {
                     Text(
                         modifier = Modifier
-                            .padding(end = 16.dp),
+                            .padding(end = 8.dp),
                         text = stringResource(id = R.string.grid_power)
                     )
                     Text(

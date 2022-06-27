@@ -44,11 +44,11 @@ fun QuasarCharged(
                 modifier = Modifier,
                 text = buildAnnotatedString {
                     append(Utils.decimalFormatOnlyShowDecimalIfNotZero.format(power))
-                    withStyle(style = SpanStyle(fontSize = 10.sp, fontWeight = FontWeight.Bold)) {
+                    withStyle(style = SpanStyle(fontSize = 8.sp, fontWeight = FontWeight.Bold)) {
                         append(stringResource(id = R.string.kw))
                     }
                 },
-                style = MaterialTheme.typography.h5
+                style = MaterialTheme.typography.h6
             )
         } else {
             Text(
