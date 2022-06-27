@@ -88,7 +88,7 @@ fun SourceOfEnergyData(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 16.dp)
-                    .height(2.dp)
+                    .height(1.dp)
                     .background(MaterialTheme.colors.onSurface),
             )
 
