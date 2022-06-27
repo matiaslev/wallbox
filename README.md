@@ -2,8 +2,9 @@
 
 Light Mode
 
-![lightMode](https://user-images.githubusercontent.com/39838885/175821399-65d96103-4083-4a29-8a53-c4e3024f94be.gif)
+![Light-Mode](https://user-images.githubusercontent.com/39838885/175956291-ab5b807f-60f7-4aa7-bc52-28533c57e591.gif)
 
 Dark Mode
 
-![darkMode](https://user-images.githubusercontent.com/39838885/175821500-987583a5-8f77-492c-b94e-a8efdd9fbc3b.gif)
+![Dark-Mode](https://user-images.githubusercontent.com/39838885/175956363-12e5d3b1-c869-4f04-ba24-0a8d643c78b2.gif)
+
