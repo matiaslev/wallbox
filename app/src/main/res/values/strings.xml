@@ -3,8 +3,8 @@
     <string name="kw_value" translatable="false">%1$s Kw</string>
     <string name="two_values_with_space" translatable="false">%1$s %2$s</string>
     <string name="two_values" translatable="false">%1$s%2$s</string>
-    <string name="solar_panels">solar panels</string>
-    <string name="from_the_grid">from the grid</string>
+    <string name="solar_panels">Solar panels</string>
+    <string name="from_the_grid">From the grid</string>
     <string name="quasars_supplying_building">Quasars supplying building</string>
     <string name="building_demand">Building Demand</string>
     <string name="solar_power">Solar Power</string>
@@ -15,7 +15,7 @@
     <string name="not_charging_car">not charging car</string>
     <string name="empty_text" />
     <string name="not_transfering_energy">Not transferring energy</string>
-    <string name="supplying_building" >supplying building</string>
+    <string name="supplying_building" >Supplying building</string>
     <string name="network_error">try again and check your connection if the problem persist</string>
     <string name="we_not_have_data_to_show_you_yet">we not have data to show you yet</string>
     <string name="what_are_you_waiting_for">what are you waiting for</string>
